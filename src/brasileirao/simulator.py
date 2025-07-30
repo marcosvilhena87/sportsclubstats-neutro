@@ -101,6 +101,16 @@ def parse_matches(path: str | Path) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def reset_results_from(matches: pd.DataFrame, start_date: str | pd.Timestamp) -> pd.DataFrame:
+    """Return a copy of ``matches`` with results on or after ``start_date`` cleared."""
+
+    df = matches.copy()
+    start = pd.to_datetime(start_date)
+    mask = df["date"] >= start
+    df.loc[mask, ["home_score", "away_score"]] = np.nan
+    return df
+
+
 # ---------------------------------------------------------------------------
 # Table computation
 # ---------------------------------------------------------------------------

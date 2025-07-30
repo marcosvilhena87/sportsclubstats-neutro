@@ -201,4 +201,14 @@ def test_dynamic_params_deterministic():
     pd.testing.assert_frame_equal(t1, t2)
 
 
+def test_reset_results_from():
+    df = parse_matches("data/Brasileirao2024A.txt")
+    start = "2024-07-01"
+    reset = simulator.reset_results_from(df, start)
+    mask = reset["date"] >= pd.to_datetime(start)
+    assert reset.loc[mask, ["home_score", "away_score"]].isna().all().all()
+    # ensure simulation runs without errors
+    simulator.simulate_chances(reset, iterations=1, progress=False)
+
+
 

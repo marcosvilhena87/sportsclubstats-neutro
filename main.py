@@ -48,6 +48,12 @@ def main() -> None:
         help="number of parallel workers",
     )
     parser.add_argument(
+        "--from-date",
+        dest="from_date",
+        default=None,
+        help="ignore results on or after this YYYY-MM-DD date",
+    )
+    parser.add_argument(
         "--html-output",
         default=os.path.join(os.path.dirname(__file__), "brasileirao.html"),
         help="path to save summary table as HTML",
@@ -55,6 +61,9 @@ def main() -> None:
     args = parser.parse_args()
 
     matches = parse_matches(args.file)
+    if args.from_date:
+        from_date = pd.to_datetime(args.from_date)
+        matches.loc[matches["date"] >= from_date, ["home_score", "away_score"]] = np.nan
     rng = np.random.default_rng(args.seed) if args.seed is not None else None
     # Fixed simulation parameters
     tie_prob = DEFAULT_TIE_PERCENT / 100.0
