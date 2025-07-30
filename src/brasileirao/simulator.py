@@ -201,54 +201,43 @@ def league_table(matches: pd.DataFrame) -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 
 
-def estimate_tie_percent(matches: pd.DataFrame) -> float:
-    """Return the percent of played games that finished level."""
+def _base_rates(matches: pd.DataFrame) -> tuple[float, float]:
+    """Return tie probability and home advantage from played matches."""
     played = matches.dropna(subset=["home_score", "away_score"])
     if len(played) == 0:
-        return DEFAULT_TIE_PERCENT
+        return DEFAULT_TIE_PERCENT / 100.0, DEFAULT_HOME_FIELD_ADVANTAGE
     draws = (played["home_score"] == played["away_score"]).sum()
-    return draws / len(played) * 100.0
-
-
-def estimate_home_advantage(matches: pd.DataFrame) -> float:
-    """Return the ratio of home wins to away wins from played games."""
-    played = matches.dropna(subset=["home_score", "away_score"])
+    tie_prob = draws / len(played)
     home_wins = (played["home_score"] > played["away_score"]).sum()
     away_wins = (played["home_score"] < played["away_score"]).sum()
     if away_wins == 0:
-        return float(home_wins) if home_wins > 0 else 1.0
-    return home_wins / away_wins
+        home_adv = float(home_wins) if home_wins > 0 else 1.0
+    else:
+        home_adv = home_wins / away_wins
+    return tie_prob, home_adv
 
 
-def estimate_tie_percent_by_team(matches: pd.DataFrame) -> Dict[str, float]:
-    """Return draw percentages for each club based on home games."""
+def _team_rates(matches: pd.DataFrame) -> tuple[Dict[str, float], Dict[str, float]]:
+    """Return per-club tie probabilities and home advantage ratios."""
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     played = matches.dropna(subset=["home_score", "away_score"])
-    percents: Dict[str, float] = {}
+    tie_map: Dict[str, float] = {}
+    home_map: Dict[str, float] = {}
     for team in teams:
         home = played[played["home_team"] == team]
         if len(home) == 0:
-            percents[team] = DEFAULT_TIE_PERCENT
+            tie_map[team] = DEFAULT_TIE_PERCENT / 100.0
+            home_map[team] = 1.0
         else:
             draws = (home["home_score"] == home["away_score"]).sum()
-            percents[team] = draws / len(home) * 100.0
-    return percents
-
-
-def estimate_home_advantage_by_team(matches: pd.DataFrame) -> Dict[str, float]:
-    """Return home/away win ratios calculated per club."""
-    teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
-    played = matches.dropna(subset=["home_score", "away_score"])
-    ratios: Dict[str, float] = {}
-    for team in teams:
-        home = played[played["home_team"] == team]
-        hw = (home["home_score"] > home["away_score"]).sum()
-        aw = (home["home_score"] < home["away_score"]).sum()
-        if aw == 0:
-            ratios[team] = float(hw) if hw > 0 else 1.0
-        else:
-            ratios[team] = hw / aw
-    return ratios
+            tie_map[team] = draws / len(home)
+            hw = (home["home_score"] > home["away_score"]).sum()
+            aw = (home["home_score"] < home["away_score"]).sum()
+            if aw == 0:
+                home_map[team] = float(hw) if hw > 0 else 1.0
+            else:
+                home_map[team] = hw / aw
+    return tie_map, home_map
 
 
 def _simulate_table(
@@ -412,8 +401,7 @@ def simulate_chances(
         rng = np.random.default_rng()
 
     if dynamic_params:
-        tie_prob = estimate_tie_percent(matches) / 100.0
-        home_field_adv = estimate_home_advantage(matches)
+        tie_prob, home_field_adv = _base_rates(matches)
 
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     champs = {t: 0 for t in teams}
@@ -496,8 +484,7 @@ def simulate_relegation_chances(
         rng = np.random.default_rng()
 
     if dynamic_params:
-        tie_prob = estimate_tie_percent(matches) / 100.0
-        home_field_adv = estimate_home_advantage(matches)
+        tie_prob, home_field_adv = _base_rates(matches)
 
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     relegated = {t: 0 for t in teams}
@@ -581,8 +568,7 @@ def simulate_final_table(
         rng = np.random.default_rng()
 
     if dynamic_params:
-        tie_prob = estimate_tie_percent(matches) / 100.0
-        home_field_adv = estimate_home_advantage(matches)
+        tie_prob, home_field_adv = _base_rates(matches)
 
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     pos_totals = {t: 0.0 for t in teams}
@@ -681,8 +667,7 @@ def summary_table(
         rng = np.random.default_rng()
 
     if dynamic_params:
-        tie_prob = estimate_tie_percent(matches) / 100.0
-        home_field_adv = estimate_home_advantage(matches)
+        tie_prob, home_field_adv = _base_rates(matches)
 
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     title_counts = {t: 0 for t in teams}

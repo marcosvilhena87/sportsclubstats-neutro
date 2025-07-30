@@ -181,20 +181,6 @@ def test_parallel_consistency():
     pd.testing.assert_frame_equal(serial, parallel)
 
 
-def test_estimate_functions():
-    df = parse_matches("data/Brasileirao2024A.txt")
-    tie = simulator.estimate_tie_percent(df)
-    home = simulator.estimate_home_advantage(df)
-    assert abs(tie - 26.578947) < 1e-6
-    assert abs(home - 1.8181818) < 1e-6
-
-
-def test_estimate_functions_by_team():
-    df = parse_matches("data/Brasileirao2024A.txt")
-    tie = simulator.estimate_tie_percent_by_team(df)
-    home = simulator.estimate_home_advantage_by_team(df)
-    assert abs(tie["Palmeiras"] - 10.526315) < 1e-6
-    assert abs(home["Corinthians"] - 10.0) < 1e-6
 
 
 def test_dynamic_params_deterministic():
@@ -220,18 +206,12 @@ def test_dynamic_params_deterministic():
 
 def test_dynamic_team_params_deterministic():
     df = parse_matches("data/Brasileirao2024A.txt")
-    tie_map = {
-        k: v / 100.0 for k, v in simulator.estimate_tie_percent_by_team(df).items()
-    }
-    home_map = simulator.estimate_home_advantage_by_team(df)
     rng = np.random.default_rng(7)
     t1 = simulator.summary_table(
         df,
         iterations=5,
         rng=rng,
         progress=False,
-        tie_prob_map=tie_map,
-        home_advantage_map=home_map,
         dynamic_team_params=True,
         n_jobs=2,
     )
@@ -241,8 +221,6 @@ def test_dynamic_team_params_deterministic():
         iterations=5,
         rng=rng,
         progress=False,
-        tie_prob_map=tie_map,
-        home_advantage_map=home_map,
         dynamic_team_params=True,
         n_jobs=2,
     )

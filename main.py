@@ -10,6 +10,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 import argparse
 
 import numpy as np
+import pandas as pd
 
 from brasileirao import parse_matches, summary_table
 from brasileirao.simulator import (
@@ -17,10 +18,6 @@ from brasileirao.simulator import (
     DEFAULT_JOBS,
     DEFAULT_ALPHA,
     DEFAULT_TIE_PERCENT,
-    estimate_home_advantage,
-    estimate_home_advantage_by_team,
-    estimate_tie_percent,
-    estimate_tie_percent_by_team,
 )
 
 # Default behaviour uses a simple model without recalculating parameters
@@ -115,8 +112,19 @@ def main() -> None:
     matches = parse_matches(args.file)
     rng = np.random.default_rng(args.seed) if args.seed is not None else None
     if args.dynamic_params:
-        tie_prob = estimate_tie_percent(matches) / 100.0
-        home_adv = estimate_home_advantage(matches)
+        played = matches.dropna(subset=["home_score", "away_score"])
+        if len(played) == 0:
+            tie_prob = DEFAULT_TIE_PERCENT / 100.0
+            home_adv = DEFAULT_HOME_FIELD_ADVANTAGE
+        else:
+            draws = (played["home_score"] == played["away_score"]).sum()
+            tie_prob = draws / len(played)
+            home_wins = (played["home_score"] > played["away_score"]).sum()
+            away_wins = (played["home_score"] < played["away_score"]).sum()
+            if away_wins == 0:
+                home_adv = float(home_wins) if home_wins > 0 else 1.0
+            else:
+                home_adv = home_wins / away_wins
     else:
         tie_prob = args.tie_percent / 100.0
         home_adv = args.home_advantage
@@ -124,11 +132,24 @@ def main() -> None:
     tie_map = None
     home_map = None
     if args.per_team_params:
-        tie_map = {
-            k: v / 100.0
-            for k, v in estimate_tie_percent_by_team(matches).items()
-        }
-        home_map = estimate_home_advantage_by_team(matches)
+        teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
+        played = matches.dropna(subset=["home_score", "away_score"])
+        tie_map = {}
+        home_map = {}
+        for team in teams:
+            home = played[played["home_team"] == team]
+            if len(home) == 0:
+                tie_map[team] = DEFAULT_TIE_PERCENT / 100.0
+                home_map[team] = 1.0
+            else:
+                draws = (home["home_score"] == home["away_score"]).sum()
+                tie_map[team] = draws / len(home)
+                hw = (home["home_score"] > home["away_score"]).sum()
+                aw = (home["home_score"] < home["away_score"]).sum()
+                if aw == 0:
+                    home_map[team] = float(hw) if hw > 0 else 1.0
+                else:
+                    home_map[team] = hw / aw
     summary = summary_table(
         matches,
         iterations=args.simulations,
