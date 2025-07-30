@@ -3,6 +3,7 @@
 from .simulator import (
     league_table,
     parse_matches,
+    reset_results_from,
     simulate_chances,
     simulate_relegation_chances,
     simulate_final_table,
@@ -12,6 +13,7 @@ from .simulator import (
 __all__ = [
     "parse_matches",
     "league_table",
+    "reset_results_from",
     "simulate_chances",
     "simulate_relegation_chances",
     "simulate_final_table",

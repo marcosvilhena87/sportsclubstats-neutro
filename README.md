@@ -20,6 +20,8 @@ The simulator runs in parallel by default using all available CPU cores. Use the
 example will execute the Monte Carlo iterations using four parallel processes.
 The summary table is automatically saved as `brasileirao.html` in the same
 directory as `main.py`. Pass `--html-output <file>` to choose a custom path.
+Use `--from-date YYYY-MM-DD` to ignore results on or after a given date and
+simulate from that point forward.
 
 The draw rate and home-field advantage are fixed at
 `DEFAULT_TIE_PERCENT` (33.3) and `DEFAULT_HOME_FIELD_ADVANTAGE` (1.0).
