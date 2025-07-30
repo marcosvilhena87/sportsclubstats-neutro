@@ -197,46 +197,6 @@ def league_table(matches: pd.DataFrame) -> pd.DataFrame:
 # Simulation helpers
 # ---------------------------------------------------------------------------
 
-
-def _base_rates(matches: pd.DataFrame) -> tuple[float, float]:
-    """Return tie probability and home advantage from played matches."""
-    played = matches.dropna(subset=["home_score", "away_score"])
-    if len(played) == 0:
-        return DEFAULT_TIE_PERCENT / 100.0, DEFAULT_HOME_FIELD_ADVANTAGE
-    draws = (played["home_score"] == played["away_score"]).sum()
-    tie_prob = draws / len(played)
-    home_wins = (played["home_score"] > played["away_score"]).sum()
-    away_wins = (played["home_score"] < played["away_score"]).sum()
-    if away_wins == 0:
-        home_adv = float(home_wins) if home_wins > 0 else 1.0
-    else:
-        home_adv = home_wins / away_wins
-    return tie_prob, home_adv
-
-
-def _team_rates(matches: pd.DataFrame) -> tuple[Dict[str, float], Dict[str, float]]:
-    """Return per-club tie probabilities and home advantage ratios."""
-    teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
-    played = matches.dropna(subset=["home_score", "away_score"])
-    tie_map: Dict[str, float] = {}
-    home_map: Dict[str, float] = {}
-    for team in teams:
-        home = played[played["home_team"] == team]
-        if len(home) == 0:
-            tie_map[team] = DEFAULT_TIE_PERCENT / 100.0
-            home_map[team] = 1.0
-        else:
-            draws = (home["home_score"] == home["away_score"]).sum()
-            tie_map[team] = draws / len(home)
-            hw = (home["home_score"] > home["away_score"]).sum()
-            aw = (home["home_score"] < home["away_score"]).sum()
-            if aw == 0:
-                home_map[team] = float(hw) if hw > 0 else 1.0
-            else:
-                home_map[team] = hw / aw
-    return tie_map, home_map
-
-
 def _simulate_table(
     played_df: pd.DataFrame,
     remaining: pd.DataFrame,
