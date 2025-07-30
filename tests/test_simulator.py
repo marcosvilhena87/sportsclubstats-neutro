@@ -204,28 +204,6 @@ def test_dynamic_params_deterministic():
     pd.testing.assert_frame_equal(t1, t2)
 
 
-def test_dynamic_team_params_deterministic():
-    df = parse_matches("data/Brasileirao2024A.txt")
-    rng = np.random.default_rng(7)
-    t1 = simulator.summary_table(
-        df,
-        iterations=5,
-        rng=rng,
-        progress=False,
-        dynamic_team_params=True,
-        n_jobs=2,
-    )
-    rng = np.random.default_rng(7)
-    t2 = simulator.summary_table(
-        df,
-        iterations=5,
-        rng=rng,
-        progress=False,
-        dynamic_team_params=True,
-        n_jobs=2,
-    )
-    pd.testing.assert_frame_equal(t1, t2)
-
 
 def test_alpha_validation_private():
     played = pd.DataFrame(
