@@ -20,8 +20,6 @@ from brasileirao.simulator import (
     DEFAULT_TIE_PERCENT,
 )
 
-# Default behaviour uses a simple model without recalculating parameters
-DEFAULT_DYNAMIC_PARAMS = False
 
 
 def main() -> None:
@@ -57,13 +55,6 @@ def main() -> None:
         default=DEFAULT_HOME_FIELD_ADVANTAGE,
         help="home field advantage factor",
     )
-    parser.add_argument(
-        "--dynamic-params",
-        dest="dynamic_params",
-        action="store_true",
-        default=DEFAULT_DYNAMIC_PARAMS,
-        help="estimate tie percent and home advantage from played matches",
-    )
     def alpha_type(value: str) -> float:
         try:
             val = float(value)
@@ -95,23 +86,8 @@ def main() -> None:
 
     matches = parse_matches(args.file)
     rng = np.random.default_rng(args.seed) if args.seed is not None else None
-    if args.dynamic_params:
-        played = matches.dropna(subset=["home_score", "away_score"])
-        if len(played) == 0:
-            tie_prob = DEFAULT_TIE_PERCENT / 100.0
-            home_adv = DEFAULT_HOME_FIELD_ADVANTAGE
-        else:
-            draws = (played["home_score"] == played["away_score"]).sum()
-            tie_prob = draws / len(played)
-            home_wins = (played["home_score"] > played["away_score"]).sum()
-            away_wins = (played["home_score"] < played["away_score"]).sum()
-            if away_wins == 0:
-                home_adv = float(home_wins) if home_wins > 0 else 1.0
-            else:
-                home_adv = home_wins / away_wins
-    else:
-        tie_prob = args.tie_percent / 100.0
-        home_adv = args.home_advantage
+    tie_prob = args.tie_percent / 100.0
+    home_adv = args.home_advantage
 
     tie_map = None
     home_map = None

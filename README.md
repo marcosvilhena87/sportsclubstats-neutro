@@ -25,8 +25,7 @@ The simulator also accepts `--tie-percent` and `--home-advantage` options to
 control the share of matches ending in a draw and the bias towards the home
 team. By default these values are kept fixed using the historical averages
 `DEFAULT_TIE_PERCENT` (27.0) and `DEFAULT_HOME_FIELD_ADVANTAGE` (1.7).
-Pass `--dynamic-params` to recalculate them from the games already played in
-the data set. `DEFAULT_JOBS` still defines the parallelism level.
+`DEFAULT_JOBS` still defines the parallelism level.
 
 Matches are simulated purely at random with all teams considered equal.
 
@@ -70,9 +69,7 @@ All simulation functions accept an optional ``n_jobs`` argument to control the
 degree of parallelism. By default ``n_jobs`` is set to the number of CPU cores,
 so simulations automatically run in parallel. When ``n_jobs`` is greater than
 one, joblib is used to distribute the work across multiple workers. By default
-the tie percentage and home advantage are kept fixed by default. Use
-``--dynamic-params`` if you prefer to recalculate them from the supplied
-``matches`` before each simulation run.
+the tie percentage and home advantage are kept fixed.
 
 ## License
 
