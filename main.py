@@ -12,8 +12,9 @@ import argparse
 import numpy as np
 import pandas as pd
 
-from brasileirao import parse_matches, summary_table
-from brasileirao.simulator import (
+from simulator import (
+    parse_matches,
+    summary_table,
     DEFAULT_JOBS,
     DEFAULT_TIE_PERCENT,
 )
