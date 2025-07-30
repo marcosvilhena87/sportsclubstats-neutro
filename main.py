@@ -89,8 +89,6 @@ def main() -> None:
     tie_prob = args.tie_percent / 100.0
     home_adv = args.home_advantage
 
-    tie_map = None
-    home_map = None
     summary = summary_table(
         matches,
         iterations=args.simulations,
@@ -98,8 +96,6 @@ def main() -> None:
         progress=args.progress,
         tie_prob=tie_prob,
         home_field_adv=home_adv,
-        tie_prob_map=tie_map,
-        home_advantage_map=home_map,
         alpha=args.alpha,
         n_jobs=args.jobs,
     )
