@@ -22,7 +22,6 @@ from brasileirao.simulator import (
 
 # Default behaviour uses a simple model without recalculating parameters
 DEFAULT_DYNAMIC_PARAMS = False
-DEFAULT_DYNAMIC_TEAM_PARAMS = False
 
 
 def main() -> None:
@@ -64,13 +63,6 @@ def main() -> None:
         action="store_true",
         default=DEFAULT_DYNAMIC_PARAMS,
         help="estimate tie percent and home advantage from played matches",
-    )
-    parser.add_argument(
-        "--update-team-params",
-        dest="dynamic_team_params",
-        action="store_true",
-        default=DEFAULT_DYNAMIC_TEAM_PARAMS,
-        help="adjust per-team parameters dynamically during the simulation",
     )
     def alpha_type(value: str) -> float:
         try:
@@ -132,7 +124,6 @@ def main() -> None:
         home_field_adv=home_adv,
         tie_prob_map=tie_map,
         home_advantage_map=home_map,
-        dynamic_team_params=args.dynamic_team_params,
         alpha=args.alpha,
         n_jobs=args.jobs,
     )

@@ -252,65 +252,11 @@ def _simulate_table(
     dynamic_team_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
 ) -> pd.DataFrame:
-    """Simulate remaining fixtures with adjustable probabilities.
-
-    When ``dynamic_team_params`` is ``True`` the per-team probability maps are
-    updated after every simulated match using the results generated so far. The
-    ``alpha`` parameter controls the smoothing applied when updating these
-    dynamic values, where ``alpha`` represents the weight given to the newly
-    calculated statistic.
-    """
+    """Simulate remaining fixtures with adjustable probabilities."""
     if not 0.0 <= alpha <= 1.0:
         raise ValueError("alpha must be between 0 and 1")
 
     sims: list[dict] = []
-
-    if dynamic_team_params:
-        # Track home match statistics for each team so we can update
-        # probabilities without repeatedly filtering DataFrames.
-        teams: set[str] = set()
-        for df in (played_df, remaining):
-            if len(df) > 0:
-                teams.update(df["home_team"].unique())
-                teams.update(df["away_team"].unique())
-
-        home_games = {t: 0 for t in teams}
-        home_draws = {t: 0 for t in teams}
-        home_wins = {t: 0 for t in teams}
-        home_losses = {t: 0 for t in teams}
-
-        for _, row in played_df.iterrows():
-            home = row["home_team"]
-            hs = int(row["home_score"])
-            as_ = int(row["away_score"])
-            home_games[home] += 1
-            if hs > as_:
-                home_wins[home] += 1
-            elif hs < as_:
-                home_losses[home] += 1
-            else:
-                home_draws[home] += 1
-
-        if tie_prob_map is None:
-            tie_prob_map = {}
-            for t in teams:
-                if home_games[t] == 0:
-                    tie_prob_map[t] = tie_prob
-                else:
-                    tie_prob_map[t] = home_draws[t] / home_games[t]
-        else:
-            tie_prob_map = tie_prob_map.copy()
-        if home_advantage_map is None:
-            home_advantage_map = {}
-            for t in teams:
-                hw = home_wins[t]
-                aw = home_losses[t]
-                if aw == 0:
-                    home_advantage_map[t] = float(hw) if hw > 0 else 1.0
-                else:
-                    home_advantage_map[t] = hw / aw
-        else:
-            home_advantage_map = home_advantage_map.copy()
 
     for _, row in remaining.iterrows():
         tp = (
@@ -342,27 +288,6 @@ def _simulate_table(
                 "away_score": as_,
             }
         )
-        if dynamic_team_params:
-            home = row["home_team"]
-            home_games[home] += 1
-            if hs > as_:
-                home_wins[home] += 1
-            elif hs < as_:
-                home_losses[home] += 1
-            else:
-                home_draws[home] += 1
-            new_tp = home_draws[home] / home_games[home]
-            old_tp = tie_prob_map.get(home, tie_prob)
-            tie_prob_map[home] = (1 - alpha) * old_tp + alpha * new_tp
-
-            hw = home_wins[home]
-            aw = home_losses[home]
-            if aw == 0:
-                new_ha = float(hw) if hw > 0 else 1.0
-            else:
-                new_ha = hw / aw
-            old_ha = home_advantage_map.get(home, home_field_adv)
-            home_advantage_map[home] = (1 - alpha) * old_ha + alpha * new_ha
     all_matches = pd.concat([played_df, pd.DataFrame(sims)], ignore_index=True)
     return league_table(all_matches)
 
@@ -426,7 +351,6 @@ def simulate_chances(
                 home_field_adv=home_field_adv,
                 home_advantage_map=home_advantage_map,
                 tie_prob_map=tie_prob_map,
-                dynamic_team_params=dynamic_team_params,
                 alpha=alpha,
             )
 
@@ -446,7 +370,6 @@ def simulate_chances(
                 home_field_adv=home_field_adv,
                 home_advantage_map=home_advantage_map,
                 tie_prob_map=tie_prob_map,
-                dynamic_team_params=dynamic_team_params,
                 alpha=alpha,
             )
             champs[table.iloc[0]["team"]] += 1
@@ -508,7 +431,6 @@ def simulate_relegation_chances(
                 home_field_adv=home_field_adv,
                 home_advantage_map=home_advantage_map,
                 tie_prob_map=tie_prob_map,
-                dynamic_team_params=dynamic_team_params,
                 alpha=alpha,
             )
 
@@ -529,7 +451,6 @@ def simulate_relegation_chances(
                 home_field_adv=home_field_adv,
                 home_advantage_map=home_advantage_map,
                 tie_prob_map=tie_prob_map,
-                dynamic_team_params=dynamic_team_params,
                 alpha=alpha,
             )
             for team in table.tail(4)["team"]:
@@ -551,7 +472,6 @@ def simulate_final_table(
     home_advantage_map: Dict[str, float] | None = None,
     tie_prob_map: Dict[str, float] | None = None,
     dynamic_params: bool = True,
-    dynamic_team_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
@@ -594,7 +514,6 @@ def simulate_final_table(
                 home_field_adv=home_field_adv,
                 home_advantage_map=home_advantage_map,
                 tie_prob_map=tie_prob_map,
-                dynamic_team_params=dynamic_team_params,
                 alpha=alpha,
             )
 
@@ -616,7 +535,6 @@ def simulate_final_table(
                 home_field_adv=home_field_adv,
                 home_advantage_map=home_advantage_map,
                 tie_prob_map=tie_prob_map,
-                dynamic_team_params=dynamic_team_params,
                 alpha=alpha,
             )
             for idx, row in table.iterrows():
@@ -649,16 +567,13 @@ def summary_table(
     home_advantage_map: Dict[str, float] | None = None,
     tie_prob_map: Dict[str, float] | None = None,
     dynamic_params: bool = True,
-    dynamic_team_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Return a combined projection table ranked by expected points.
 
     The ``position`` column corresponds to the rank after sorting by the
-    expected point totals. With ``dynamic_team_params`` set the team specific
-    parameters evolve as the simulation proceeds. ``alpha`` defines the weight
-    of newly calculated team statistics when these parameters are updated.
+    expected point totals.
     """
     if not 0.0 <= alpha <= 1.0:
         raise ValueError("alpha must be between 0 and 1")
@@ -694,7 +609,6 @@ def summary_table(
                 home_field_adv=home_field_adv,
                 home_advantage_map=home_advantage_map,
                 tie_prob_map=tie_prob_map,
-                dynamic_team_params=dynamic_team_params,
                 alpha=alpha,
             )
 
@@ -719,7 +633,6 @@ def summary_table(
                 home_field_adv=home_field_adv,
                 home_advantage_map=home_advantage_map,
                 tie_prob_map=tie_prob_map,
-                dynamic_team_params=dynamic_team_params,
                 alpha=alpha,
             )
             title_counts[table.iloc[0]["team"]] += 1
