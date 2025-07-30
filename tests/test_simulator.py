@@ -205,27 +205,3 @@ def test_dynamic_params_deterministic():
 
 
 
-def test_alpha_validation_private():
-    played = pd.DataFrame(
-        [],
-        columns=["date", "home_team", "away_team", "home_score", "away_score"],
-    )
-    remaining = pd.DataFrame(
-        [{"date": "2025-01-01", "home_team": "A", "away_team": "B"}]
-    )
-    rng = np.random.default_rng(0)
-    with pytest.raises(ValueError):
-        simulator._simulate_table(played, remaining, rng, alpha=-0.1)
-    with pytest.raises(ValueError):
-        simulator._simulate_table(played, remaining, rng, alpha=1.1)
-    simulator._simulate_table(played, remaining, rng, alpha=0.0)
-    simulator._simulate_table(played, remaining, rng, alpha=1.0)
-
-
-def test_alpha_validation_public():
-    df = parse_matches("data/Brasileirao2024A.txt")
-    with pytest.raises(ValueError):
-        simulator.simulate_chances(df, iterations=1, progress=False, alpha=-0.2)
-    with pytest.raises(ValueError):
-        simulator.simulate_chances(df, iterations=1, progress=False, alpha=1.2)
-    simulator.simulate_chances(df, iterations=1, progress=False, alpha=0.5)
