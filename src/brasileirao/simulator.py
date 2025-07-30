@@ -203,15 +203,14 @@ def _simulate_table(
     rng: np.random.Generator,
     *,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
-    home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
 ) -> pd.DataFrame:
-    """Simulate remaining fixtures with adjustable probabilities."""
+    """Simulate remaining fixtures with fixed home advantage."""
 
     sims: list[dict] = []
 
     for _, row in remaining.iterrows():
         tp = tie_prob
-        ha = home_field_adv
+        ha = DEFAULT_HOME_FIELD_ADVANTAGE
         rest = 1.0 - tp
         home_prob = rest * ha / (ha + 1)
         draw_prob = tp
@@ -247,7 +246,6 @@ def simulate_chances(
     rng: np.random.Generator | None = None,
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
-    home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return title probabilities.
@@ -278,7 +276,6 @@ def simulate_chances(
                 remaining,
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
-                home_field_adv=home_field_adv,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -294,7 +291,6 @@ def simulate_chances(
                 remaining,
                 rng,
                 tie_prob=tie_prob,
-                home_field_adv=home_field_adv,
             )
             champs[table.iloc[0]["team"]] += 1
 
@@ -310,7 +306,6 @@ def simulate_relegation_chances(
     rng: np.random.Generator | None = None,
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
-    home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return probabilities of finishing in the bottom four."""
@@ -338,7 +333,6 @@ def simulate_relegation_chances(
                 remaining,
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
-                home_field_adv=home_field_adv,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -355,7 +349,6 @@ def simulate_relegation_chances(
                 remaining,
                 rng,
                 tie_prob=tie_prob,
-                home_field_adv=home_field_adv,
             )
             for team in table.tail(4)["team"]:
                 relegated[team] += 1
@@ -372,7 +365,6 @@ def simulate_final_table(
     rng: np.random.Generator | None = None,
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
-    home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Project average finishing position and points."""
@@ -402,7 +394,6 @@ def simulate_final_table(
                 remaining,
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
-                home_field_adv=home_field_adv,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -420,7 +411,6 @@ def simulate_final_table(
                 remaining,
                 rng,
                 tie_prob=tie_prob,
-                home_field_adv=home_field_adv,
             )
             for idx, row in table.iterrows():
                 pos_totals[row["team"]] += idx + 1
@@ -448,7 +438,6 @@ def summary_table(
     rng: np.random.Generator | None = None,
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
-    home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Return a combined projection table ranked by expected points.
@@ -483,7 +472,6 @@ def summary_table(
                 remaining,
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
-                home_field_adv=home_field_adv,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -504,7 +492,6 @@ def summary_table(
                 remaining,
                 rng,
                 tie_prob=tie_prob,
-                home_field_adv=home_field_adv,
             )
             title_counts[table.iloc[0]["team"]] += 1
             for team in table.tail(4)["team"]:

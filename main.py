@@ -14,7 +14,6 @@ import pandas as pd
 
 from brasileirao import parse_matches, summary_table
 from brasileirao.simulator import (
-    DEFAULT_HOME_FIELD_ADVANTAGE,
     DEFAULT_JOBS,
     DEFAULT_TIE_PERCENT,
 )
@@ -59,7 +58,6 @@ def main() -> None:
     rng = np.random.default_rng(args.seed) if args.seed is not None else None
     # Fixed simulation parameters
     tie_prob = DEFAULT_TIE_PERCENT / 100.0
-    home_adv = DEFAULT_HOME_FIELD_ADVANTAGE
 
     summary = summary_table(
         matches,
@@ -67,7 +65,6 @@ def main() -> None:
         rng=rng,
         progress=args.progress,
         tie_prob=tie_prob,
-        home_field_adv=home_adv,
         n_jobs=args.jobs,
     )
     if args.html_output:

@@ -127,7 +127,6 @@ def test_simulate_table_no_draws_when_zero_tie():
         remaining,
         rng,
         tie_prob=0.0,
-        home_field_adv=1.0,
     )
     assert table["draws"].sum() == 0
 
@@ -140,7 +139,6 @@ def test_simulate_final_table_custom_params_deterministic():
         iterations=5,
         rng=rng,
         tie_prob=0.2,
-        home_field_adv=1.5,
         n_jobs=2,
     )
     rng = np.random.default_rng(9)
@@ -149,7 +147,6 @@ def test_simulate_final_table_custom_params_deterministic():
         iterations=5,
         rng=rng,
         tie_prob=0.2,
-        home_field_adv=1.5,
         n_jobs=2,
     )
     pd.testing.assert_frame_equal(t1, t2)
