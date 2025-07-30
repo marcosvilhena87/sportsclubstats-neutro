@@ -294,7 +294,7 @@ def simulate_chances(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_params: bool = True,
+    dynamic_params: bool = False,
     dynamic_team_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
@@ -312,8 +312,6 @@ def simulate_chances(
     if rng is None:
         rng = np.random.default_rng()
 
-    if dynamic_params:
-        tie_prob, home_field_adv = _base_rates(matches)
 
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     champs = {t: 0 for t in teams}
@@ -371,7 +369,7 @@ def simulate_relegation_chances(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_params: bool = True,
+    dynamic_params: bool = False,
     dynamic_team_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
@@ -388,8 +386,6 @@ def simulate_relegation_chances(
     if rng is None:
         rng = np.random.default_rng()
 
-    if dynamic_params:
-        tie_prob, home_field_adv = _base_rates(matches)
 
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     relegated = {t: 0 for t in teams}
@@ -447,7 +443,7 @@ def simulate_final_table(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_params: bool = True,
+    dynamic_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
@@ -463,8 +459,6 @@ def simulate_final_table(
     if rng is None:
         rng = np.random.default_rng()
 
-    if dynamic_params:
-        tie_prob, home_field_adv = _base_rates(matches)
 
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     pos_totals = {t: 0.0 for t in teams}
@@ -536,7 +530,7 @@ def summary_table(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_params: bool = True,
+    dynamic_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
@@ -551,8 +545,6 @@ def summary_table(
     if rng is None:
         rng = np.random.default_rng()
 
-    if dynamic_params:
-        tie_prob, home_field_adv = _base_rates(matches)
 
     teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
     title_counts = {t: 0 for t in teams}
