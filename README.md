@@ -48,14 +48,14 @@ These rules are implemented in :func:`league_table` and therefore affect all sim
 ## Project Layout
 
 - `data/` – raw fixtures and results.
-- `src/brasileirao/simulator.py` – parsing, table calculation and simulation routines.
+- `src/simulator.py` – parsing, table calculation and simulation routines.
 - `main.py` – command-line interface to run the simulation.
 - `tests/` – basic unit tests.
 
 The main functions can be imported directly from the package:
 
 ```python
-from brasileirao import (
+from simulator import (
     parse_matches,
     league_table,
     simulate_chances,

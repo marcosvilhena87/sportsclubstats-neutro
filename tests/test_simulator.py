@@ -2,8 +2,8 @@ import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(
 import pandas as pd
 import numpy as np
 import pytest
-from brasileirao import parse_matches, league_table, simulate_chances
-from brasileirao import simulator
+from simulator import parse_matches, league_table, simulate_chances
+import simulator
 
 
 def test_parse_matches():

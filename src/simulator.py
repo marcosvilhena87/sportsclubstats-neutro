@@ -3,7 +3,7 @@
 This module reads fixtures exported from SportsClubStats and provides
 functions to compute league tables and run a SportsClubStats-style model to
 project results.  It powers the public functions exposed in
-``brasileirao.__init__``.
+``__init__``.
 """
 
 from __future__ import annotations
