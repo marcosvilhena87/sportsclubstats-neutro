@@ -1,0 +1,383 @@
+GamesBegin
+TeamListedFirst: home
+13/04/2024	Internacional	2-1	Bahia
+13/04/2024	Criciúma	1-1	Juventude
+14/04/2024	São Paulo	1-2	Fortaleza
+14/04/2024	Fluminense	2-2	Bragantino
+14/04/2024	Athletico-PR	4-0	Cuiabá
+14/04/2024	Atlético-GO	1-2	Flamengo
+14/04/2024	Corinthians	0-0	Atlético-MG
+14/04/2024	Vasco		2-1	Grêmio
+14/04/2024	Cruzeiro	3-2	Botafogo
+14/04/2024	Vitória		0-1	Palmeiras
+17/04/2024	Bahia		2-1	Fluminense
+17/04/2024	Bragantino	2-1	Vasco
+17/04/2024	Grêmio		2-0	Athletico-PR
+18/04/2024	Palmeiras	0-1	Internacional
+18/04/2024	Atlético-MG	1-1	Criciúma
+18/04/2024	Fortaleza	1-1	Cruzeiro
+18/04/2024	Juventude	2-0	Corinthians
+18/04/2024	Flamengo	2-1	São Paulo
+19/04/2024	Botafogo	1-0	Atlético-GO
+20/04/2024	Fluminense	2-1	Vasco
+20/04/2024	Grêmio		1-0	Cuiabá
+20/04/2024	Bragantino	1-0	Corinthians
+21/04/2024	Atlético-MG	3-0	Cruzeiro
+21/04/2024	Palmeiras	0-0	Flamengo
+21/04/2024	Vitória		2-2	Bahia
+21/04/2024	Athletico-PR	1-0	Internacional
+21/04/2024	Atlético-GO	0-3	São Paulo
+21/04/2024	Botafogo	5-1	Juventude
+27/04/2024	Vasco		0-4	Criciúma
+27/04/2024	Cuiabá		0-3	Atlético-MG
+28/04/2024	Bahia		1-0	Grêmio
+28/04/2024	Flamengo	0-2	Botafogo
+28/04/2024	Corinthians	3-0	Fluminense
+28/04/2024	Cruzeiro	3-1	Vitória
+28/04/2024	Fortaleza	1-1	Bragantino
+28/04/2024	Juventude	1-1	Athletico-PR
+29/04/2024	Internacional	1-1	Atlético-GO
+30/04/2024	São Paulo	0-0	Palmeiras
+04/05/2024	Fluminense	2-2	Atlético-MG
+04/05/2024	Bragantino	1-1	Flamengo
+05/05/2024	Corinthians	0-0	Fortaleza
+05/05/2024	Athletico-PR	1-0	Vasco
+05/05/2024	Vitória		1-3	São Paulo
+05/05/2024	Botafogo	1-2	Bahia
+05/05/2024	Cuiabá		0-2	Palmeiras
+11/05/2024	Flamengo	2-0	Corinthians
+12/05/2024	Fortaleza	1-1	Botafogo
+12/05/2024	Atlético-GO	0-1	Cruzeiro
+12/05/2024	Palmeiras	0-2	Athletico-PR
+12/05/2024	Vasco		2-1	Vitória
+12/05/2024	Bahia		1-0	Bragantino
+14/05/2024	São Paulo	2-1	Fluminense
+01/06/2024	Grêmio		0-2	Bragantino
+01/06/2024	Vitória		0-2	Atlético-GO
+01/06/2024	Fluminense	1-1	Juventude
+01/06/2024	Cuiabá		0-1	Internacional
+02/06/2024	Corinthians	0-1	Botafogo
+02/06/2024	Vasco		1-6	Flamengo
+02/06/2024	Atlético-MG	1-1	Bahia
+02/06/2024	Criciúma	1-2	Palmeiras
+02/06/2024	Fortaleza	1-0	Athletico-PR
+02/06/2024	São Paulo	2-0	Cruzeiro
+05/06/2024	Juventude	1-0	Atlético-GO
+06/06/2024	Cuiabá		0-0	Vitória
+09/06/2024	Criciúma	2-5	Cuiabá
+11/06/2024	Juventude	1-1	Vitória
+11/06/2024	Atlético-GO	2-2	Corinthians
+12/06/2024	Botafogo	1-0	Fluminense
+12/06/2024	Bragantino	1-2	Atlético-MG
+13/06/2024	Cruzeiro	2-1	Cuiabá
+14/06/2024	Flamengo	2-1	Grêmio
+14/06/2024	Internacional	0-0	São Paulo
+14/06/2024	Athletico-PR	3-1	Criciúma
+14/06/2024	Palmeiras	2-0	Vasco
+14/06/2024	Bahia		1-0	Fortaleza
+15/06/2024	Bragantino	2-1	Juventude
+16/06/2024	Fluminense	1-2	Atlético-GO
+16/06/2024	Vitória		2-1	Internacional
+16/06/2024	Corinthians	2-2	São Paulo
+16/06/2024	Athletico-PR	1-1	Flamengo
+16/06/2024	Grêmio		1-2	Botafogo
+16/06/2024	Cuiabá		5-0	Fortaleza
+16/06/2024	Criciúma	2-2	Bahia
+16/06/2024	Vasco		0-0	Cruzeiro
+18/06/2024	Atlético-MG	0-4	Palmeiras
+19/06/2024	Atlético-GO	1-2	Criciúma
+19/06/2024	Botafogo	1-1	Athletico-PR
+20/06/2024	Juventude	2-0	Vasco
+20/06/2024	Fortaleza	1-0	Grêmio
+20/06/2024	São Paulo	0-1	Cuiabá
+20/06/2024	Cruzeiro	2-0	Fluminense
+20/06/2024	Internacional	1-0	Corinthians
+20/06/2024	Vitória		4-2	Atlético-MG
+21/06/2024	Flamengo	2-1	Bahia
+21/06/2024	Palmeiras	2-1	Bragantino
+22/06/2024	Criciúma	2-1	Botafogo
+22/06/2024	Grêmio		0-1	Internacional
+22/06/2024	Cuiabá		0-0	Atlético-GO
+23/06/2024	Vasco		4-1	São Paulo
+23/06/2024	Bahia		4-1	Cruzeiro
+23/06/2024	Fluminense	0-1	Flamengo
+23/06/2024	Athletico-PR	1-1	Corinthians
+23/06/2024	Palmeiras	3-1	Juventude
+23/06/2024	Bragantino	2-1	Vitória
+23/06/2024	Atlético-MG	1-1	Fortaleza
+26/06/2024	Cruzeiro	2-0	Athletico-PR
+26/06/2024	Botafogo	2-1	Bragantino
+27/06/2024	Corinthians	1-1	Cuiabá
+27/06/2024	Atlético-GO	1-1	Grêmio
+27/06/2024	Juventude	2-1	Flamengo
+27/06/2024	Bahia		2-1	Vasco
+27/06/2024	Internacional	1-2	Atlético-MG
+27/06/2024	Fortaleza	3-0	Palmeiras
+27/06/2024	Fluminense	0-1	Vitória
+28/06/2024	São Paulo	2-1	Criciúma
+29/06/2024	Cuiabá		1-1	Bragantino
+29/06/2024	Vasco		1-1	Botafogo
+30/06/2024	Atlético-MG	1-1	Atlético-GO
+30/06/2024	São Paulo	3-1	Bahia
+30/06/2024	Fortaleza	2-1	Juventude
+30/06/2024	Grêmio		1-0	Fluminense
+30/06/2024	Criciúma	1-1	Internacional
+30/06/2024	Flamengo	2-1	Cruzeiro
+30/06/2024	Vitória		0-1	Athletico-PR
+02/07/2024	Palmeiras	2-0	Corinthians
+03/07/2024	Cuiabá		1-2	Botafogo
+04/07/2024	Criciúma	1-0	Cruzeiro
+04/07/2024	Vasco		2-0	Fortaleza
+04/07/2024	Atlético-MG	2-4	Flamengo
+04/07/2024	Bragantino	3-1	Atlético-GO
+04/07/2024	Athletico-PR	1-2	São Paulo
+04/07/2024	Grêmio		2-2	Palmeiras
+04/07/2024	Bahia		2-0	Juventude
+05/07/2024	Corinthians	3-2	Vitória
+05/07/2024	Fluminense	1-1	Internacional
+07/07/2024	Flamengo	1-1	Cuiabá
+07/07/2024	São Paulo	2-0	Bragantino
+07/07/2024	Juventude	3-0	Grêmio
+07/07/2024	Cruzeiro	3-0	Corinthians
+07/07/2024	Fortaleza	1-0	Fluminense
+07/07/2024	Internacional	1-2	Vasco
+07/07/2024	Atlético-GO	1-2	Athletico-PR
+07/07/2024	Vitória		2-1	Criciúma
+07/07/2024	Palmeiras	2-0	Bahia
+08/07/2024	Botafogo	3-0	Atlético-MG
+10/07/2024	Grêmio		0-2	Cruzeiro
+10/07/2024	Athletico-PR	1-3	Bahia
+10/07/2024	Vasco		2-0	Corinthians
+11/07/2024	Palmeiras	3-1	Atlético-GO
+12/07/2024	Criciúma	1-1	Fluminense
+12/07/2024	Flamengo	1-2	Fortaleza
+12/07/2024	Vitória		0-1	Botafogo
+12/07/2024	Atlético-MG	2-1	São Paulo
+13/07/2024	Cruzeiro	2-1	Bragantino
+13/07/2024	Bahia		1-2	Cuiabá
+16/07/2024	Juventude	1-1	Atlético-MG
+17/07/2024	Corinthians	2-1	Criciúma
+17/07/2024	Atlético-GO	0-1	Vasco
+18/07/2024	São Paulo	1-0	Grêmio
+18/07/2024	Botafogo	1-0	Palmeiras
+18/07/2024	Fortaleza	3-1	Vitória
+20/07/2024	Flamengo	2-1	Criciúma
+20/07/2024	Botafogo	1-0	Internacional
+21/07/2024	Palmeiras	2-0	Cruzeiro
+21/07/2024	Grêmio		2-0	Vitória
+21/07/2024	Bahia		0-1	Corinthians
+21/07/2024	Atlético-MG	2-0	Vasco
+21/07/2024	Juventude	0-0	São Paulo
+21/07/2024	Fortaleza	3-1	Atlético-GO
+21/07/2024	Bragantino	1-0	Athletico-PR
+22/07/2024	Cuiabá		0-1	Fluminense
+24/07/2024	Cruzeiro	2-0	Juventude
+24/07/2024	Criciúma	1-1	Fortaleza
+24/07/2024	São Paulo	2-2	Botafogo
+25/07/2024	Vitória		1-2	Flamengo
+25/07/2024	Fluminense	1-0	Palmeiras
+25/07/2024	Atlético-GO	1-1	Bahia
+26/07/2024	Corinthians	2-2	Grêmio
+27/07/2024	Palmeiras	0-2	Vitória
+27/07/2024	Juventude	1-2	Criciúma
+28/07/2024	Bahia		1-1	Internacional
+28/07/2024	Fortaleza	1-0	São Paulo
+28/07/2024	Botafogo	0-3	Cruzeiro
+28/07/2024	Bragantino	0-1	Fluminense
+28/07/2024	Flamengo	2-0	Atlético-GO
+28/07/2024	Atlético-MG	2-1	Corinthians
+28/07/2024	Grêmio		1-0	Vasco
+28/07/2024	Cuiabá		1-2	Athletico-PR
+03/08/2024	Vitória		1-0	Cuiabá
+03/08/2024	Vasco		2-2	Bragantino
+04/08/2024	Atlético-GO	1-4	Botafogo
+04/08/2024	Criciúma	2-1	Atlético-MG
+04/08/2024	São Paulo	1-0	Flamengo
+04/08/2024	Athletico-PR	0-2	Grêmio
+04/08/2024	Fluminense	1-0	Bahia
+04/08/2024	Corinthians	1-1	Juventude
+04/08/2024	Internacional	1-1	Palmeiras
+06/08/2024	Cruzeiro	1-2	Fortaleza
+10/08/2024	Fortaleza	1-0	Criciúma
+10/08/2024	Cuiabá		1-3	Grêmio
+11/08/2024	Vasco		2-0	Fluminense
+11/08/2024	Cruzeiro	0-0	Atlético-MG
+11/08/2024	Corinthians	1-1	Bragantino
+11/08/2024	Juventude	3-2	Botafogo
+11/08/2024	Flamengo	1-1	Palmeiras
+11/08/2024	São Paulo	1-0	Atlético-GO
+11/08/2024	Bahia		2-0	Vitória
+11/08/2024	Internacional	2-2	Athletico-PR
+14/08/2024	Internacional	2-1	Juventude
+17/08/2024	Grêmio		0-2	Bahia
+17/08/2024	Atlético-MG	1-1	Cuiabá
+17/08/2024	Bragantino	1-2	Fortaleza
+18/08/2024	Fluminense	0-0	Corinthians
+18/08/2024	Criciúma	2-2	Vasco
+18/08/2024	Palmeiras	2-1	São Paulo
+18/08/2024	Atlético-GO	1-0	Internacional
+18/08/2024	Botafogo	4-1	Flamengo
+18/08/2024	Athletico-PR	1-2	Juventude
+20/08/2024	Vitória		2-2	Cruzeiro
+24/08/2024	Atlético-GO	2-1	Juventude
+24/08/2024	Palmeiras	5-0	Cuiabá
+25/08/2024	Atlético-MG	0-2	Fluminense
+25/08/2024	Bahia		0-0	Botafogo
+25/08/2024	Fortaleza	1-0	Corinthians
+25/08/2024	Criciúma	0-1	Grêmio
+25/08/2024	São Paulo	2-1	Vitória
+25/08/2024	Internacional	1-0	Cruzeiro
+26/08/2024	Flamengo	2-1	Bragantino
+27/08/2024	Vasco		2-1	Athletico-PR
+28/08/2024	Criciúma	1-0	Bragantino
+28/08/2024	Cruzeiro	0-0	Internacional
+31/08/2024	Cuiabá		2-1	Criciúma
+01/09/2024	Botafogo	2-0	Fortaleza
+01/09/2024	Cruzeiro	3-1	Atlético-GO
+01/09/2024	Grêmio		2-3	Atlético-MG
+01/09/2024	Corinthians	2-1	Flamengo
+01/09/2024	Athletico-PR	0-2	Palmeiras
+01/09/2024	Juventude	1-3	Internacional
+01/09/2024	Fluminense	2-0	São Paulo
+01/09/2024	Vitória		0-1	Vasco
+01/09/2024	Bragantino	2-1	Bahia
+06/09/2024	Cuiabá		0-0	Juventude
+11/09/2024	Internacional	2-1	Fortaleza
+14/09/2024	Atlético-GO	0-2	Vitória
+14/09/2024	Athletico-PR	1-1	Fortaleza
+15/09/2024	Botafogo	2-1	Corinthians
+15/09/2024	Palmeiras	5-0	Criciúma
+15/09/2024	Bragantino	2-2	Grêmio
+15/09/2024	Juventude	2-1	Fluminense
+15/09/2024	Cruzeiro	0-1	São Paulo
+15/09/2024	Flamengo	1-1	Vasco
+15/09/2024	Bahia		3-0	Atlético-MG
+17/09/2024	Internacional	3-0	Cuiabá
+21/09/2024	Vitória		1-0	Juventude
+21/09/2024	Corinthians	3-0	Atlético-GO
+21/09/2024	Fluminense	0-1	Botafogo
+22/09/2024	Fortaleza	4-1	Bahia
+22/09/2024	Atlético-MG	3-0	Bragantino
+22/09/2024	Vasco		0-1	Palmeiras
+22/09/2024	São Paulo	1-3	Internacional
+22/09/2024	Cuiabá		0-0	Cruzeiro
+22/09/2024	Grêmio		3-2	Flamengo
+23/09/2024	Criciúma	0-0	Athletico-PR
+25/09/2024	Bragantino	2-2	Internacional
+25/09/2024	Grêmio		1-2	Criciúma
+28/09/2024	Palmeiras	2-1	Atlético-MG
+29/09/2024	Botafogo	0-0	Grêmio
+29/09/2024	Juventude	1-1	Bragantino
+29/09/2024	Fortaleza	1-0	Cuiabá
+29/09/2024	Atlético-GO	1-0	Fluminense
+29/09/2024	São Paulo	3-1	Corinthians
+29/09/2024	Bahia		1-0	Criciúma
+29/09/2024	Cruzeiro	1-1	Vasco
+29/09/2024	Internacional	3-1	Vitória
+30/09/2024	Flamengo	1-0	Athletico-PR
+03/10/2024	Criciúma	2-0	Atlético-GO
+04/10/2024	Fluminense	1-0	Cruzeiro
+05/10/2024	Grêmio		3-1	Fortaleza
+05/10/2024	Atlético-MG	2-2	Vitória
+05/10/2024	Bragantino	0-0	Palmeiras
+05/10/2024	Athletico-PR	0-1	Botafogo
+05/10/2024	Bahia		0-2	Flamengo
+05/10/2024	Corinthians	2-2	Internacional
+05/10/2024	Cuiabá		2-0	São Paulo
+06/10/2024	Vasco		1-1	Juventude
+09/10/2024	Atlético-MG	2-1	Grêmio
+17/10/2024	Fortaleza	1-1	Atlético-MG
+17/10/2024	São Paulo	3-0	Vasco
+18/10/2024	Flamengo	0-2	Fluminense
+18/10/2024	Corinthians	5-2	Athletico-PR
+18/10/2024	Atlético-GO	0-0	Cuiabá
+19/10/2024	Botafogo	1-1	Criciúma
+19/10/2024	Cruzeiro	1-1	Bahia
+19/10/2024	Vitória		1-0	Bragantino
+19/10/2024	Internacional	1-0	Grêmio
+21/10/2024	Juventude	3-5	Palmeiras
+22/10/2024	Fluminense	1-0	Athletico-PR
+24/10/2024	Vasco		1-0	Cuiabá
+26/10/2024	Flamengo	4-2	Juventude
+26/10/2024	Grêmio		3-1	Atlético-GO
+26/10/2024	Palmeiras	2-2	Fortaleza
+26/10/2024	Vitória		2-1	Fluminense
+26/10/2024	Athletico-PR	3-0	Cruzeiro
+26/10/2024	Bragantino	0-1	Botafogo
+26/10/2024	Atlético-MG	1-3	Internacional
+27/10/2024	Criciúma	1-1	São Paulo
+28/10/2024	Cuiabá		0-1	Corinthians
+29/10/2024	Vasco		3-2	Bahia
+30/10/2024	Internacional	1-1	Flamengo
+02/11/2024	Fluminense	2-2	Grêmio
+02/11/2024	Bragantino	0-0	Cuiabá
+02/11/2024	Juventude	0-3	Fortaleza
+02/11/2024	Athletico-PR	1-2	Vitória
+04/11/2024	Corinthians	2-0	Palmeiras
+06/11/2024	Bahia		0-3	São Paulo
+06/11/2024	Botafogo	3-0	Vasco
+06/11/2024	Internacional	2-0	Criciúma
+07/11/2024	Atlético-GO	1-0	Atlético-MG
+07/11/2024	Cruzeiro	0-1	Flamengo
+08/11/2024	Internacional	2-0	Fluminense
+09/11/2024	Palmeiras	1-0	Grêmio
+09/11/2024	Vitória		1-2	Corinthians
+09/11/2024	Botafogo	0-0	Cuiabá
+09/11/2024	Juventude	2-1	Bahia
+09/11/2024	Atlético-GO	0-0	Bragantino
+09/11/2024	Fortaleza	3-0	Vasco
+09/11/2024	Cruzeiro	2-1	Criciúma
+10/11/2024	São Paulo	2-1	Athletico-PR
+13/11/2024	Flamengo	0-0	Atlético-MG
+16/11/2024	Athletico-PR	1-0	Atlético-MG
+20/11/2024	Corinthians	2-1	Cruzeiro
+20/11/2024	Criciúma	0-1	Vitória
+20/11/2024	Athletico-PR	2-0	Atlético-GO
+20/11/2024	Bragantino	1-1	São Paulo
+20/11/2024	Bahia		1-2	Palmeiras
+20/11/2024	Cuiabá		1-2	Flamengo
+20/11/2024	Grêmio		2-2	Juventude
+21/11/2024	Atlético-MG	0-0	Botafogo
+21/11/2024	Vasco		0-1	Internacional
+23/11/2024	Fluminense	2-2	Fortaleza
+23/11/2024	Botafogo	1-1	Vitória
+23/11/2024	Atlético-GO	0-1	Palmeiras
+23/11/2024	Juventude	1-1	Cuiabá
+24/11/2024	São Paulo	2-2	Atlético-MG
+24/11/2024	Corinthians	3-1	Vasco
+24/11/2024	Internacional	4-1	Bragantino
+24/11/2024	Bahia		1-1	Athletico-PR
+26/11/2024	Fluminense	0-0	Criciúma
+26/11/2024	Fortaleza	0-0	Flamengo
+27/11/2024	Atlético-MG	2-3	Juventude
+27/11/2024	Palmeiras	1-3	Botafogo
+28/11/2024	Cruzeiro	1-1	Grêmio
+30/11/2024	Criciúma	2-4	Corinthians
+30/11/2024	Cuiabá		1-2	Bahia
+01/12/2024	Vasco		2-2	Atlético-GO
+01/12/2024	Grêmio		2-1	São Paulo
+01/12/2024	Flamengo	3-2	Internacional
+01/12/2024	Athletico-PR	1-1	Fluminense
+01/12/2024	Vitória		2-0	Fortaleza
+01/12/2024	Bragantino	1-1	Cruzeiro
+03/12/2024	Corinthians	3-0	Bahia
+04/12/2024	Vasco		2-0	Atlético-MG
+04/12/2024	Criciúma	0-3	Flamengo
+04/12/2024	São Paulo	1-2	Juventude
+04/12/2024	Vitória		1-1	Grêmio
+05/12/2024	Internacional	0-1	Botafogo
+05/12/2024	Cruzeiro	1-2	Palmeiras
+05/12/2024	Atlético-GO	3-1	Fortaleza
+05/12/2024	Fluminense	1-0	Cuiabá
+05/12/2024	Athletico-PR	1-2	Bragantino
+08/12/2024	Bragantino	5-1	Criciúma
+08/12/2024	Fortaleza	3-0	Internacional
+08/12/2024	Cuiabá		1-2	Vasco
+08/12/2024	Juventude	0-1	Cruzeiro
+08/12/2024	Palmeiras	0-1	Fluminense
+08/12/2024	Botafogo	2-1	São Paulo
+08/12/2024	Grêmio		0-3	Corinthians
+08/12/2024	Atlético-MG	1-0	Athletico-PR
+08/12/2024	Bahia		2-0	Atlético-GO
+08/12/2024	Flamengo	2-2	Vitória
+GamesEnd
