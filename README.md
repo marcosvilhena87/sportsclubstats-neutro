@@ -26,14 +26,12 @@ control the share of matches ending in a draw and the bias towards the home
 team. By default these values are kept fixed using the historical averages
 `DEFAULT_TIE_PERCENT` (27.0) and `DEFAULT_HOME_FIELD_ADVANTAGE` (1.7).
 Pass `--dynamic-params` to recalculate them from the games already played in
-the data set. Per-team parameters are disabled by default. Use
-`--per-team-params` to calculate a separate tie percentage and home advantage
-for each club based on their home results. Per-team statistics can also be
-updated after each simulated match so that probabilities adapt as the
-simulation progresses. Enable this behaviour with `--update-team-params` or
-leave it disabled for faster runs. `DEFAULT_JOBS` still defines the parallelism
-level. The `--alpha` option controls the smoothing factor applied when updating
-dynamic team parameters and must be between 0 and 1. The default value is 0.1.
+the data set. Team statistics can be updated after each simulated match so that
+probabilities adapt as the simulation progresses. Enable this behaviour with
+`--update-team-params` or leave it disabled for faster runs. `DEFAULT_JOBS`
+still defines the parallelism level. The `--alpha` option controls the
+smoothing factor applied when updating dynamic team parameters and must be
+between 0 and 1. The default value is 0.1.
 
 Matches are simulated purely at random with all teams considered equal.
 

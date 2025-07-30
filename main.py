@@ -22,7 +22,6 @@ from brasileirao.simulator import (
 
 # Default behaviour uses a simple model without recalculating parameters
 DEFAULT_DYNAMIC_PARAMS = False
-DEFAULT_PER_TEAM_PARAMS = False
 DEFAULT_DYNAMIC_TEAM_PARAMS = False
 
 
@@ -65,13 +64,6 @@ def main() -> None:
         action="store_true",
         default=DEFAULT_DYNAMIC_PARAMS,
         help="estimate tie percent and home advantage from played matches",
-    )
-    parser.add_argument(
-        "--per-team-params",
-        dest="per_team_params",
-        action="store_true",
-        default=DEFAULT_PER_TEAM_PARAMS,
-        help="calculate tie percent and home advantage for each team",
     )
     parser.add_argument(
         "--update-team-params",
@@ -131,25 +123,6 @@ def main() -> None:
 
     tie_map = None
     home_map = None
-    if args.per_team_params:
-        teams = pd.unique(matches[["home_team", "away_team"]].values.ravel())
-        played = matches.dropna(subset=["home_score", "away_score"])
-        tie_map = {}
-        home_map = {}
-        for team in teams:
-            home = played[played["home_team"] == team]
-            if len(home) == 0:
-                tie_map[team] = DEFAULT_TIE_PERCENT / 100.0
-                home_map[team] = 1.0
-            else:
-                draws = (home["home_score"] == home["away_score"]).sum()
-                tie_map[team] = draws / len(home)
-                hw = (home["home_score"] > home["away_score"]).sum()
-                aw = (home["home_score"] < home["away_score"]).sum()
-                if aw == 0:
-                    home_map[team] = float(hw) if hw > 0 else 1.0
-                else:
-                    home_map[team] = hw / aw
     summary = summary_table(
         matches,
         iterations=args.simulations,
