@@ -44,34 +44,6 @@ def main() -> None:
         help="disable the progress bar during simulations",
     )
     parser.add_argument(
-        "--tie-percent",
-        type=float,
-        default=DEFAULT_TIE_PERCENT,
-        help="percent of games ending in a tie",
-    )
-    parser.add_argument(
-        "--home-advantage",
-        type=float,
-        default=DEFAULT_HOME_FIELD_ADVANTAGE,
-        help="home field advantage factor",
-    )
-    def alpha_type(value: str) -> float:
-        try:
-            val = float(value)
-        except ValueError as exc:  # pragma: no cover - argparse handles error
-            raise argparse.ArgumentTypeError("alpha must be a number") from exc
-        if not 0.0 <= val <= 1.0:
-            raise argparse.ArgumentTypeError(
-                "alpha must be between 0 and 1"
-            )
-        return val
-    parser.add_argument(
-        "--alpha",
-        type=alpha_type,
-        default=DEFAULT_ALPHA,
-        help="smoothing factor for dynamic team parameters",
-    )
-    parser.add_argument(
         "--jobs",
         type=int,
         default=DEFAULT_JOBS,
@@ -86,8 +58,10 @@ def main() -> None:
 
     matches = parse_matches(args.file)
     rng = np.random.default_rng(args.seed) if args.seed is not None else None
-    tie_prob = args.tie_percent / 100.0
-    home_adv = args.home_advantage
+    # Fixed simulation parameters
+    tie_prob = DEFAULT_TIE_PERCENT / 100.0
+    home_adv = DEFAULT_HOME_FIELD_ADVANTAGE
+    alpha = DEFAULT_ALPHA
 
     summary = summary_table(
         matches,
@@ -96,7 +70,7 @@ def main() -> None:
         progress=args.progress,
         tie_prob=tie_prob,
         home_field_adv=home_adv,
-        alpha=args.alpha,
+        alpha=alpha,
         n_jobs=args.jobs,
     )
     if args.html_output:

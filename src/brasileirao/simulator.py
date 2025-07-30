@@ -28,13 +28,12 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 
 # Percent chance of a match ending in a tie when teams are of equal strength
-# Based on the 2022-2024 seasons where ~27% of games finished level.
-DEFAULT_TIE_PERCENT = 27.0
+# Fixed at one third of matches ending level.
+DEFAULT_TIE_PERCENT = 33.3
 
 # Relative advantage multiplier for the home team
-# Calculated from past results where home wins occurred about 1.7 times as
-# often as away wins.
-DEFAULT_HOME_FIELD_ADVANTAGE = 1.7
+# No built-in home advantage is used by default.
+DEFAULT_HOME_FIELD_ADVANTAGE = 1.0
 
 # Default number of parallel jobs. Use all available cores.
 DEFAULT_JOBS = os.cpu_count() or 1
