@@ -247,8 +247,6 @@ def _simulate_table(
     *,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    home_advantage_map: Dict[str, float] | None = None,
-    tie_prob_map: Dict[str, float] | None = None,
     dynamic_team_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
 ) -> pd.DataFrame:
@@ -259,16 +257,8 @@ def _simulate_table(
     sims: list[dict] = []
 
     for _, row in remaining.iterrows():
-        tp = (
-            tie_prob_map.get(row["home_team"], tie_prob)
-            if tie_prob_map
-            else tie_prob
-        )
-        ha = (
-            home_advantage_map.get(row["home_team"], home_field_adv)
-            if home_advantage_map
-            else home_field_adv
-        )
+        tp = tie_prob
+        ha = home_field_adv
         rest = 1.0 - tp
         home_prob = rest * ha / (ha + 1)
         draw_prob = tp
@@ -305,8 +295,6 @@ def simulate_chances(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    home_advantage_map: Dict[str, float] | None = None,
-    tie_prob_map: Dict[str, float] | None = None,
     dynamic_params: bool = True,
     dynamic_team_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
@@ -349,8 +337,7 @@ def simulate_chances(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                home_advantage_map=home_advantage_map,
-                tie_prob_map=tie_prob_map,
+                
                 alpha=alpha,
             )
 
@@ -368,8 +355,6 @@ def simulate_chances(
                 rng,
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                home_advantage_map=home_advantage_map,
-                tie_prob_map=tie_prob_map,
                 alpha=alpha,
             )
             champs[table.iloc[0]["team"]] += 1
@@ -387,8 +372,6 @@ def simulate_relegation_chances(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    home_advantage_map: Dict[str, float] | None = None,
-    tie_prob_map: Dict[str, float] | None = None,
     dynamic_params: bool = True,
     dynamic_team_params: bool = False,
     alpha: float = DEFAULT_ALPHA,
@@ -429,8 +412,6 @@ def simulate_relegation_chances(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                home_advantage_map=home_advantage_map,
-                tie_prob_map=tie_prob_map,
                 alpha=alpha,
             )
 
@@ -449,8 +430,6 @@ def simulate_relegation_chances(
                 rng,
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                home_advantage_map=home_advantage_map,
-                tie_prob_map=tie_prob_map,
                 alpha=alpha,
             )
             for team in table.tail(4)["team"]:
@@ -469,8 +448,6 @@ def simulate_final_table(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    home_advantage_map: Dict[str, float] | None = None,
-    tie_prob_map: Dict[str, float] | None = None,
     dynamic_params: bool = True,
     alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
@@ -512,8 +489,6 @@ def simulate_final_table(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                home_advantage_map=home_advantage_map,
-                tie_prob_map=tie_prob_map,
                 alpha=alpha,
             )
 
@@ -533,8 +508,6 @@ def simulate_final_table(
                 rng,
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                home_advantage_map=home_advantage_map,
-                tie_prob_map=tie_prob_map,
                 alpha=alpha,
             )
             for idx, row in table.iterrows():
@@ -564,8 +537,6 @@ def summary_table(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    home_advantage_map: Dict[str, float] | None = None,
-    tie_prob_map: Dict[str, float] | None = None,
     dynamic_params: bool = True,
     alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
@@ -607,8 +578,6 @@ def summary_table(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                home_advantage_map=home_advantage_map,
-                tie_prob_map=tie_prob_map,
                 alpha=alpha,
             )
 
@@ -631,8 +600,6 @@ def summary_table(
                 rng,
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                home_advantage_map=home_advantage_map,
-                tie_prob_map=tie_prob_map,
                 alpha=alpha,
             )
             title_counts[table.iloc[0]["team"]] += 1
