@@ -16,7 +16,6 @@ from brasileirao import parse_matches, summary_table
 from brasileirao.simulator import (
     DEFAULT_HOME_FIELD_ADVANTAGE,
     DEFAULT_JOBS,
-    DEFAULT_ALPHA,
     DEFAULT_TIE_PERCENT,
 )
 
@@ -61,7 +60,6 @@ def main() -> None:
     # Fixed simulation parameters
     tie_prob = DEFAULT_TIE_PERCENT / 100.0
     home_adv = DEFAULT_HOME_FIELD_ADVANTAGE
-    alpha = DEFAULT_ALPHA
 
     summary = summary_table(
         matches,
@@ -70,7 +68,6 @@ def main() -> None:
         progress=args.progress,
         tie_prob=tie_prob,
         home_field_adv=home_adv,
-        alpha=alpha,
         n_jobs=args.jobs,
     )
     if args.html_output:

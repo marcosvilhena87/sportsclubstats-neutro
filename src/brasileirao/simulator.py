@@ -38,8 +38,6 @@ DEFAULT_HOME_FIELD_ADVANTAGE = 1.0
 # Default number of parallel jobs. Use all available cores.
 DEFAULT_JOBS = os.cpu_count() or 1
 
-# Default smoothing factor when updating dynamic team parameters
-DEFAULT_ALPHA = 0.1
 
 
 # ---------------------------------------------------------------------------
@@ -246,12 +244,8 @@ def _simulate_table(
     *,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_team_params: bool = False,
-    alpha: float = DEFAULT_ALPHA,
 ) -> pd.DataFrame:
     """Simulate remaining fixtures with adjustable probabilities."""
-    if not 0.0 <= alpha <= 1.0:
-        raise ValueError("alpha must be between 0 and 1")
 
     sims: list[dict] = []
 
@@ -294,20 +288,11 @@ def simulate_chances(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_params: bool = False,
-    dynamic_team_params: bool = False,
-    alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return title probabilities.
 
-    When ``dynamic_team_params`` is ``True`` the home advantage and tie
-    probability maps are updated after each simulated game, allowing
-    per-club behaviour to evolve during the run. ``alpha`` controls how much of
-    the newly computed statistics influence these updates.
     """
-    if not 0.0 <= alpha <= 1.0:
-        raise ValueError("alpha must be between 0 and 1")
 
     if rng is None:
         rng = np.random.default_rng()
@@ -334,8 +319,6 @@ def simulate_chances(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                
-                alpha=alpha,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -352,7 +335,6 @@ def simulate_chances(
                 rng,
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                alpha=alpha,
             )
             champs[table.iloc[0]["team"]] += 1
 
@@ -369,19 +351,9 @@ def simulate_relegation_chances(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_params: bool = False,
-    dynamic_team_params: bool = False,
-    alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
-    """Return probabilities of finishing in the bottom four.
-
-    Enabling ``dynamic_team_params`` adjusts the per-team tie and home
-    advantage metrics as simulated results accumulate. ``alpha`` determines the
-    smoothing applied when updating these parameters.
-    """
-    if not 0.0 <= alpha <= 1.0:
-        raise ValueError("alpha must be between 0 and 1")
+    """Return probabilities of finishing in the bottom four."""
 
     if rng is None:
         rng = np.random.default_rng()
@@ -407,7 +379,6 @@ def simulate_relegation_chances(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                alpha=alpha,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -425,7 +396,6 @@ def simulate_relegation_chances(
                 rng,
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                alpha=alpha,
             )
             for team in table.tail(4)["team"]:
                 relegated[team] += 1
@@ -443,18 +413,9 @@ def simulate_final_table(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_params: bool = False,
-    alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
-    """Project average finishing position and points.
-
-    If ``dynamic_team_params`` is enabled the underlying team statistics are
-    recalculated after each simulated fixture. ``alpha`` controls the smoothing
-    applied to these evolving values.
-    """
-    if not 0.0 <= alpha <= 1.0:
-        raise ValueError("alpha must be between 0 and 1")
+    """Project average finishing position and points."""
 
     if rng is None:
         rng = np.random.default_rng()
@@ -482,7 +443,6 @@ def simulate_final_table(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                alpha=alpha,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -501,7 +461,6 @@ def simulate_final_table(
                 rng,
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                alpha=alpha,
             )
             for idx, row in table.iterrows():
                 pos_totals[row["team"]] += idx + 1
@@ -530,8 +489,6 @@ def summary_table(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_field_adv: float = DEFAULT_HOME_FIELD_ADVANTAGE,
-    dynamic_params: bool = False,
-    alpha: float = DEFAULT_ALPHA,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Return a combined projection table ranked by expected points.
@@ -539,8 +496,6 @@ def summary_table(
     The ``position`` column corresponds to the rank after sorting by the
     expected point totals.
     """
-    if not 0.0 <= alpha <= 1.0:
-        raise ValueError("alpha must be between 0 and 1")
 
     if rng is None:
         rng = np.random.default_rng()
@@ -569,7 +524,6 @@ def summary_table(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                alpha=alpha,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -591,7 +545,6 @@ def summary_table(
                 rng,
                 tie_prob=tie_prob,
                 home_field_adv=home_field_adv,
-                alpha=alpha,
             )
             title_counts[table.iloc[0]["team"]] += 1
             for team in table.tail(4)["team"]:
