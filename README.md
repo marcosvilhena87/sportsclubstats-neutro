@@ -35,6 +35,17 @@ Alternatively, pass `--auto-calibrate` to estimate these parameters using all
 historical files in the `data/` directory. The computed draw rate and home
 advantage are then used for the simulation.
 
+Use ``estimate_team_strengths`` to calculate attack and defense multipliers for
+each club:
+
+```python
+from calibration import estimate_team_strengths
+strengths = estimate_team_strengths(["data/Brasileirao2024A.txt"])
+```
+
+Pass ``strengths`` via the ``team_params`` argument when calling the simulation
+functions to incorporate team quality into the projections.
+
 Matches are simulated purely at random with all teams considered equal.
 
 The script outputs the estimated chance of winning the title for each team. It then prints the probability of each side finishing in the bottom four and being relegated. It also estimates the average final position and points of every club.
