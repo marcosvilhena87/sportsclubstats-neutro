@@ -125,9 +125,9 @@ def main() -> None:
 
     TITLE_W = 7
     REL_W = 10
-    POINTS_W = len("Pontos Esperados")
+    POINTS_W = len("xPts")
     print(
-        f"{'Pos':>3}  {'Team':15s} {'Pontos Esperados':^{POINTS_W}} {'Title':^{TITLE_W}} {'Relegation':^{REL_W}}"
+        f"{'Pos':>3}  {'Team':15s} {'xPts':^{POINTS_W}} {'Title':^{TITLE_W}} {'Relegation':^{REL_W}}"
     )
     for _, row in summary.iterrows():
         title = f"{row['title']:.2%}"
