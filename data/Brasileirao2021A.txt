@@ -1,0 +1,383 @@
+GamesBegin
+TeamListedFirst: home
+29/05/2021	Cuiabá		2-2	Juventude
+30/05/2021	Bahia		3-0	Santos
+30/05/2021	São Paulo	0-0	Fluminense
+30/05/2021	Atlético-MG	1-2	Fortaleza
+30/05/2021	Flamengo	1-0	Palmeiras
+30/05/2021	Ceará		3-2	Grêmio
+30/05/2021	Chapecoense	0-3	Bragantino
+30/05/2021	Athletico-PR	1-0	América-MG
+30/05/2021	Corinthians	0-1	Atlético-GO
+31/05/2021	Internacional	2-2	Sport
+05/06/2021	Atlético-GO	2-0	São Paulo
+06/06/2021	Bragantino	3-3	Bahia
+06/06/2021	Santos		3-1	Ceará
+06/06/2021	Fluminense	1-0	Cuiabá
+06/06/2021	Fortaleza	5-1	Internacional
+06/06/2021	América-MG	0-1	Corinthians
+06/06/2021	Juventude	0-3	Athletico-PR
+06/06/2021	Palmeiras	3-1	Chapecoense
+07/06/2021	Sport		0-1	Atlético-MG
+12/06/2021	Santos		0-0	Juventude
+12/06/2021	Palmeiras	1-1	Corinthians
+13/06/2021	Grêmio		0-1	Athletico-PR
+13/06/2021	Atlético-MG	1-0	São Paulo
+13/06/2021	Flamengo	2-0	América-MG
+14/06/2021	Chapecoense	0-0	Ceará
+14/06/2021	Bahia		0-1	Internacional
+14/06/2021	Bragantino	2-2	Fluminense
+14/06/2021	Fortaleza	1-0	Sport
+16/06/2021	Internacional	0-1	Atlético-MG
+16/06/2021	São Paulo	1-1	Chapecoense
+17/06/2021	Corinthians	1-2	Bragantino
+17/06/2021	Juventude	0-3	Palmeiras
+17/06/2021	Ceará		1-2	Bahia
+17/06/2021	América-MG	0-0	Cuiabá
+17/06/2021	Sport		1-0	Grêmio
+17/06/2021	Fluminense	1-0	Santos
+17/06/2021	Atlético-GO	0-0	Fortaleza
+20/06/2021	Flamengo	2-3	Bragantino
+20/06/2021	Palmeiras	2-1	América-MG
+20/06/2021	Internacional	1-1	Ceará
+20/06/2021	Bahia		0-0	Corinthians
+20/06/2021	Fortaleza	1-1	Fluminense
+20/06/2021	Athletico-PR	2-1	Atlético-GO
+20/06/2021	Santos		2-0	São Paulo
+21/06/2021	Juventude	1-0	Sport
+22/06/2021	Atlético-MG	1-1	Chapecoense
+23/06/2021	Flamengo	2-1	Fortaleza
+23/06/2021	Bragantino	3-1	Palmeiras
+23/06/2021	Atlético-GO	1-0	Fluminense
+23/06/2021	São Paulo	2-2	Cuiabá
+24/06/2021	América-MG	1-1	Juventude
+24/06/2021	Ceará		2-1	Atlético-MG
+24/06/2021	Chapecoense	1-2	Internacional
+24/06/2021	Corinthians	2-1	Sport
+25/06/2021	Bahia		2-1	Athletico-PR
+25/06/2021	Grêmio		2-2	Santos
+27/06/2021	Juventude	1-0	Flamengo
+27/06/2021	Fluminense	1-1	Corinthians
+28/06/2021	Grêmio		0-0	Fortaleza
+28/06/2021	Athletico-PR	2-2	Chapecoense
+28/06/2021	Palmeiras	3-2	Bahia
+28/06/2021	Ceará		1-1	São Paulo
+28/06/2021	Sport		0-0	Cuiabá
+28/06/2021	Santos		2-0	Atlético-MG
+28/06/2021	América-MG	1-1	Internacional
+29/06/2021	Atlético-GO	0-1	Bragantino
+30/06/2021	Fortaleza	3-2	Chapecoense
+30/06/2021	Fluminense	1-4	Athletico-PR
+30/06/2021	Bahia		3-4	América-MG
+30/06/2021	Internacional	1-2	Palmeiras
+01/07/2021	Santos		0-0	Sport
+01/07/2021	Corinthians	0-0	São Paulo
+01/07/2021	Juventude	2-0	Grêmio
+01/07/2021	Bragantino	0-0	Ceará
+01/07/2021	Atlético-MG	4-1	Atlético-GO
+02/07/2021	Cuiabá		0-2	Flamengo
+03/07/2021	Athletico-PR	2-1	Fortaleza
+04/07/2021	Corinthians	1-1	Internacional
+04/07/2021	América-MG	2-0	Santos
+04/07/2021	Chapecoense	0-2	Bahia
+04/07/2021	Sport		0-1	Palmeiras
+04/07/2021	Flamengo	0-1	Fluminense
+04/07/2021	Ceará		2-0	Juventude
+04/07/2021	Cuiabá		0-1	Atlético-MG
+04/07/2021	São Paulo	1-2	Bragantino
+05/07/2021	Grêmio		0-1	Atlético-GO
+06/07/2021	Santos		2-1	Athletico-PR
+07/07/2021	Fortaleza	4-0	América-MG
+07/07/2021	Bahia		1-0	Juventude
+07/07/2021	Bragantino	1-1	Cuiabá
+07/07/2021	Atlético-MG	2-1	Flamengo
+07/07/2021	Palmeiras	2-0	Grêmio
+07/07/2021	Atlético-GO	1-1	Sport
+08/07/2021	Internacional	0-2	São Paulo
+08/07/2021	Fluminense	0-0	Ceará
+09/07/2021	Chapecoense	0-1	Corinthians
+10/07/2021	Grêmio		0-0	Internacional
+10/07/2021	Palmeiras	3-2	Santos
+10/07/2021	Athletico-PR	2-2	Bragantino
+10/07/2021	América-MG	0-1	Atlético-MG
+10/07/2021	São Paulo	1-0	Bahia
+10/07/2021	Sport		1-2	Fluminense
+11/07/2021	Juventude	1-1	Atlético-GO
+11/07/2021	Cuiabá		2-2	Ceará
+11/07/2021	Flamengo	2-1	Chapecoense
+12/07/2021	Fortaleza	1-0	Corinthians
+17/07/2021	São Paulo	0-1	Fortaleza
+17/07/2021	Ceará		1-0	Athletico-PR
+17/07/2021	Corinthians	1-2	Atlético-MG
+18/07/2021	Fluminense	0-1	Grêmio
+18/07/2021	Chapecoense	2-3	Cuiabá
+18/07/2021	Atlético-GO	0-3	Palmeiras
+18/07/2021	Bahia		0-5	Flamengo
+19/07/2021	Bragantino	2-2	Santos
+19/07/2021	Internacional	1-0	Juventude
+20/07/2021	América-MG	0-1	Sport
+21/07/2021	Cuiabá		2-1	Atlético-GO
+24/07/2021	Grêmio		1-1	América-MG
+24/07/2021	Palmeiras	1-0	Fluminense
+25/07/2021	Atlético-MG	3-0	Bahia
+25/07/2021	Fortaleza	1-0	Bragantino
+25/07/2021	Flamengo	5-1	São Paulo
+25/07/2021	Athletico-PR	2-1	Internacional
+25/07/2021	Santos		0-1	Atlético-GO
+26/07/2021	Sport		0-0	Ceará
+26/07/2021	Juventude	1-0	Chapecoense
+27/07/2021	Cuiabá		1-2	Corinthians
+31/07/2021	São Paulo	0-0	Palmeiras
+01/08/2021	Internacional	0-0	Cuiabá
+01/08/2021	Bragantino	1-0	Grêmio
+01/08/2021	Atlético-MG	2-0	Athletico-PR
+01/08/2021	Corinthians	1-3	Flamengo
+01/08/2021	Chapecoense	0-1	Santos
+01/08/2021	Bahia		0-1	Sport
+02/08/2021	Atlético-GO	1-1	América-MG
+02/08/2021	Ceará		3-1	Fortaleza
+06/08/2021	Sport		0-0	Bragantino
+07/08/2021	Athletico-PR	1-2	São Paulo
+08/08/2021	Cuiabá		1-1	Bahia
+08/08/2021	Palmeiras	2-3	Fortaleza
+08/08/2021	Juventude	1-2	Atlético-MG
+08/08/2021	América-MG	1-0	Fluminense
+08/08/2021	Santos		0-0	Corinthians
+08/08/2021	Ceará		0-0	Atlético-GO
+08/08/2021	Flamengo	0-4	Internacional
+10/08/2021	Grêmio		2-1	Chapecoense
+14/08/2021	Bragantino	1-2	Juventude
+14/08/2021	Atlético-MG	2-0	Palmeiras
+15/08/2021	São Paulo	2-1	Grêmio
+15/08/2021	Flamengo	2-0	Sport
+15/08/2021	Corinthians	3-1	Ceará
+15/08/2021	Bahia		1-2	Atlético-GO
+15/08/2021	Cuiabá		1-0	Athletico-PR
+15/08/2021	Fortaleza	1-1	Santos
+16/08/2021	Internacional	4-2	Fluminense
+17/08/2021	Chapecoense	1-1	América-MG
+18/08/2021	Cuiabá		0-1	Grêmio
+21/08/2021	Atlético-GO	1-1	Chapecoense
+21/08/2021	Grêmio		2-0	Bahia
+22/08/2021	Juventude	1-1	Fortaleza
+22/08/2021	Palmeiras	0-2	Cuiabá
+22/08/2021	Ceará		1-1	Flamengo
+22/08/2021	Athletico-PR	0-1	Corinthians
+22/08/2021	Santos		2-2	Internacional
+23/08/2021	Sport		0-1	São Paulo
+24/08/2021	Fluminense	1-1	Atlético-MG
+24/08/2021	América-MG	0-2	Bragantino
+28/08/2021	Sport		0-0	Chapecoense
+28/08/2021	Santos		0-4	Flamengo
+29/08/2021	Grêmio		0-1	Corinthians
+29/08/2021	Palmeiras	2-1	Athletico-PR
+29/08/2021	América-MG	2-0	Ceará
+29/08/2021	Juventude	1-1	São Paulo
+29/08/2021	Atlético-GO	0-0	Internacional
+30/08/2021	Bragantino	1-1	Atlético-MG
+30/08/2021	Fluminense	2-0	Bahia
+31/08/2021	Fortaleza	0-0	Cuiabá
+02/09/2021	Fluminense	1-1	Juventude
+05/09/2021	Bahia		4-2	Fortaleza
+05/09/2021	Cuiabá		2-1	Santos
+05/09/2021	Athletico-PR	0-0	Sport
+08/09/2021	Corinthians	1-1	Juventude
+08/09/2021	Chapecoense	1-2	Fluminense
+11/09/2021	América-MG	2-0	Athletico-PR
+11/09/2021	Juventude	1-2	Cuiabá
+11/09/2021	Bragantino	1-2	Chapecoense
+12/09/2021	Santos		0-0	Bahia
+12/09/2021	Grêmio		2-0	Ceará
+12/09/2021	Palmeiras	1-3	Flamengo
+12/09/2021	Fortaleza	0-2	Atlético-MG
+12/09/2021	Atlético-GO	1-1	Corinthians
+13/09/2021	Fluminense	2-1	São Paulo
+14/09/2021	Sport		0-1	Internacional
+18/09/2021	Chapecoense	0-2	Palmeiras
+18/09/2021	Athletico-PR	2-1	Juventude
+18/09/2021	Atlético-MG	3-0	Sport
+19/09/2021	Ceará		0-0	Santos
+19/09/2021	Bahia		1-1	Bragantino
+19/09/2021	Internacional	1-0	Fortaleza
+19/09/2021	São Paulo	2-1	Atlético-GO
+19/09/2021	Corinthians	1-1	América-MG
+20/09/2021	Flamengo	0-1	Grêmio
+21/09/2021	Cuiabá		2-2	Fluminense
+23/09/2021	São Paulo	0-0	América-MG
+25/09/2021	Ceará		1-0	Chapecoense
+25/09/2021	Corinthians	2-1	Palmeiras
+26/09/2021	São Paulo	0-0	Atlético-MG
+26/09/2021	América-MG	1-1	Flamengo
+26/09/2021	Internacional	2-0	Bahia
+26/09/2021	Fluminense	2-1	Bragantino
+26/09/2021	Juventude	3-0	Santos
+26/09/2021	Athletico-PR	4-2	Grêmio
+26/09/2021	Sport		0-1	Fortaleza
+27/09/2021	Atlético-GO	0-0	Cuiabá
+02/10/2021	Cuiabá		0-2	América-MG
+02/10/2021	Fortaleza	0-3	Atlético-GO
+02/10/2021	Bragantino	2-2	Corinthians
+03/10/2021	Atlético-MG	1-0	Internacional
+03/10/2021	Chapecoense	1-1	São Paulo
+03/10/2021	Flamengo	3-0	Athletico-PR
+03/10/2021	Palmeiras	1-1	Juventude
+04/10/2021	Grêmio		1-2	Sport
+06/10/2021	Corinthians	3-1	Bahia
+06/10/2021	Ceará		0-0	Internacional
+06/10/2021	Chapecoense	2-2	Atlético-MG
+06/10/2021	Sport		3-1	Juventude
+06/10/2021	Atlético-GO	0-2	Athletico-PR
+07/10/2021	Bragantino	1-1	Flamengo
+07/10/2021	Fluminense	0-2	Fortaleza
+07/10/2021	América-MG	2-1	Palmeiras
+07/10/2021	Grêmio		2-2	Cuiabá
+07/10/2021	São Paulo	1-1	Santos
+09/10/2021	Fluminense	0-0	Atlético-GO
+09/10/2021	Sport		1-0	Corinthians
+09/10/2021	Atlético-MG	3-1	Ceará
+09/10/2021	Athletico-PR	0-2	Bahia
+09/10/2021	Fortaleza	0-3	Flamengo
+10/10/2021	Juventude	1-1	América-MG
+10/10/2021	Palmeiras	2-4	Bragantino
+10/10/2021	Internacional	5-2	Chapecoense
+10/10/2021	Santos		1-0	Grêmio
+12/10/2021	Cuiabá		0-0	São Paulo
+12/10/2021	Bragantino	1-0	Atlético-GO
+13/10/2021	Bahia		0-0	Palmeiras
+13/10/2021	Chapecoense	1-1	Athletico-PR
+13/10/2021	Flamengo	3-1	Juventude
+13/10/2021	Atlético-MG	3-1	Santos
+14/10/2021	Fortaleza	1-0	Grêmio
+14/10/2021	Corinthians	1-0	Fluminense
+14/10/2021	Internacional	3-1	América-MG
+14/10/2021	São Paulo	1-1	Ceará
+14/10/2021	Cuiabá		1-0	Sport
+16/10/2021	Chapecoense	1-2	Fortaleza
+17/10/2021	América-MG	0-0	Bahia
+17/10/2021	Athletico-PR	0-1	Fluminense
+17/10/2021	Palmeiras	1-0	Internacional
+17/10/2021	Grêmio		3-2	Juventude
+17/10/2021	Ceará		2-2	Bragantino
+17/10/2021	Atlético-GO	2-1	Atlético-MG
+18/10/2021	Sport		0-0	Santos
+18/10/2021	Flamengo	0-0	Cuiabá
+19/10/2021	São Paulo	1-0	Corinthians
+20/10/2021	Ceará		1-2	Palmeiras
+22/10/2021	Internacional	1-1	Bragantino
+23/10/2021	Juventude	0-0	Ceará
+23/10/2021	Santos		0-2	América-MG
+23/10/2021	Fluminense	3-1	Flamengo
+23/10/2021	Fortaleza	3-0	Athletico-PR
+24/10/2021	Atlético-MG	2-1	Cuiabá
+24/10/2021	Internacional	2-2	Corinthians
+24/10/2021	Bragantino	1-0	São Paulo
+25/10/2021	Bahia		3-0	Chapecoense
+26/10/2021	Atlético-GO	2-0	Grêmio
+26/10/2021	Palmeiras	2-1	Sport
+27/10/2021	Santos		2-0	Fluminense
+27/10/2021	Bahia		1-1	Ceará
+28/10/2021	Bragantino	3-0	Sport
+30/10/2021	Athletico-PR	0-1	Santos
+30/10/2021	Flamengo	1-0	Atlético-MG
+30/10/2021	Juventude	0-0	Bahia
+31/10/2021	América-MG	2-1	Fortaleza
+31/10/2021	Grêmio		1-3	Palmeiras
+31/10/2021	Ceará		1-0	Fluminense
+31/10/2021	São Paulo	1-0	Internacional
+31/10/2021	Sport		2-0	Atlético-GO
+01/11/2021	Cuiabá		1-0	Bragantino
+02/11/2021	Corinthians	1-0	Chapecoense
+02/11/2021	Athletico-PR	2-2	Flamengo
+04/11/2021	Atlético-MG	2-1	Grêmio
+05/11/2021	Cuiabá		0-0	Chapecoense
+06/11/2021	Flamengo	2-0	Atlético-GO
+06/11/2021	Corinthians	1-0	Fortaleza
+06/11/2021	Internacional	1-0	Grêmio
+07/11/2021	Fluminense	1-0	Sport
+07/11/2021	Bragantino	0-2	Athletico-PR
+07/11/2021	Atlético-MG	1-0	América-MG
+07/11/2021	Santos		0-2	Palmeiras
+07/11/2021	Bahia		1-0	São Paulo
+07/11/2021	Ceará		1-0	Cuiabá
+08/11/2021	Chapecoense	2-2	Flamengo
+10/11/2021	Grêmio		1-0	Fluminense
+10/11/2021	Athletico-PR	2-1	Ceará
+10/11/2021	Atlético-MG	3-0	Corinthians
+10/11/2021	Santos		2-0	Bragantino
+10/11/2021	Palmeiras	4-0	Atlético-GO
+11/11/2021	Sport		2-3	América-MG
+11/11/2021	Juventude	2-1	Internacional
+11/11/2021	Fortaleza	1-1	São Paulo
+11/11/2021	Flamengo	3-0	Bahia
+13/11/2021	Atlético-GO	0-0	Santos
+13/11/2021	América-MG	3-1	Grêmio
+13/11/2021	Bragantino	3-0	Fortaleza
+13/11/2021	Internacional	2-1	Athletico-PR
+14/11/2021	Corinthians	3-2	Cuiabá
+14/11/2021	São Paulo	0-4	Flamengo
+14/11/2021	Fluminense	2-1	Palmeiras
+14/11/2021	Ceará		2-1	Sport
+14/11/2021	Chapecoense	0-2	Juventude
+16/11/2021	Athletico-PR	0-1	Atlético-MG
+16/11/2021	Grêmio		3-0	Bragantino
+17/11/2021	América-MG	0-0	Atlético-GO
+17/11/2021	Santos		2-0	Chapecoense
+17/11/2021	Cuiabá		1-0	Internacional
+17/11/2021	Fortaleza	0-4	Ceará
+17/11/2021	Palmeiras	0-2	São Paulo
+17/11/2021	Juventude	1-0	Fluminense
+18/11/2021	Flamengo	1-0	Corinthians
+19/11/2021	Sport		1-0	Bahia
+20/11/2021	Atlético-MG	2-0	Juventude
+20/11/2021	Fortaleza	1-0	Palmeiras
+20/11/2021	Chapecoense	1-3	Grêmio
+21/11/2021	Atlético-GO	1-1	Ceará
+21/11/2021	Internacional	1-2	Flamengo
+21/11/2021	Corinthians	2-0	Santos
+21/11/2021	Fluminense	2-0	América-MG
+21/11/2021	Bahia		0-0	Cuiabá
+23/11/2021	Atlético-GO	1-1	Juventude
+24/11/2021	Grêmio		2-2	Flamengo
+24/11/2021	Palmeiras	2-2	Atlético-MG
+25/11/2021	Fluminense	1-0	Internacional
+25/11/2021	São Paulo	0-0	Athletico-PR
+25/11/2021	Santos		2-0	Fortaleza
+25/11/2021	Ceará		2-1	Corinthians
+26/11/2021	Bahia		3-1	Grêmio
+27/11/2021	Bragantino	1-1	América-MG
+28/11/2021	São Paulo	2-0	Sport
+28/11/2021	Corinthians	1-0	Athletico-PR
+28/11/2021	Atlético-MG	2-1	Fluminense
+28/11/2021	Internacional	1-1	Santos
+29/11/2021	Atlético-GO	2-1	Bahia
+30/11/2021	Juventude	1-0	Bragantino
+30/11/2021	Flamengo	2-1	Ceará
+01/12/2021	América-MG	3-0	Chapecoense
+01/12/2021	Cuiabá		1-3	Palmeiras
+02/12/2021	Bahia		2-3	Atlético-MG
+02/12/2021	Grêmio		3-0	São Paulo
+03/12/2021	Athletico-PR	1-0	Cuiabá
+03/12/2021	Chapecoense	0-1	Atlético-GO
+03/12/2021	Sport		1-1	Flamengo
+04/12/2021	Fortaleza	1-0	Juventude
+05/12/2021	Bahia		2-0	Fluminense
+05/12/2021	Atlético-MG	4-3	Bragantino
+05/12/2021	Corinthians	1-1	Grêmio
+05/12/2021	Ceará		0-0	América-MG
+06/12/2021	São Paulo	3-1	Juventude
+06/12/2021	Athletico-PR	0-0	Palmeiras
+06/12/2021	Flamengo	0-1	Santos
+06/12/2021	Cuiabá		1-0	Fortaleza
+06/12/2021	Internacional	1-2	Atlético-GO
+07/12/2021	Chapecoense	0-1	Sport
+10/12/2021	Sport		1-1	Athletico-PR
+10/12/2021	Bragantino	1-0	Internacional
+10/12/2021	Juventude	1-0	Corinthians
+10/12/2021	Atlético-GO	2-0	Flamengo
+10/12/2021	Fortaleza	2-1	Bahia
+10/12/2021	Fluminense	3-0	Chapecoense
+10/12/2021	Palmeiras	1-0	Ceará
+10/12/2021	Santos		1-1	Cuiabá
+10/12/2021	América-MG	2-0	São Paulo
+10/12/2021	Grêmio		4-3	Atlético-MG
+GamesEnd
