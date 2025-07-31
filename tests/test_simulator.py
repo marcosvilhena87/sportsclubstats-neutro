@@ -238,4 +238,56 @@ def test_reset_results_from():
     simulator.simulate_chances(reset, iterations=1, progress=False)
 
 
+def test_summary_table_after_reset_deterministic():
+    df = parse_matches("data/Brasileirao2024A.txt")
+    df = simulator.reset_results_from(df, "2024-07-01")
+    rng = np.random.default_rng(7)
+    t1 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        tie_prob=0.22,
+        home_advantage=1.2,
+        progress=False,
+        n_jobs=2,
+    )
+    rng = np.random.default_rng(7)
+    t2 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        tie_prob=0.22,
+        home_advantage=1.2,
+        progress=False,
+        n_jobs=2,
+    )
+    pd.testing.assert_frame_equal(t1, t2)
+
+
+def test_summary_table_after_reset_other_params_deterministic():
+    df = parse_matches("data/Brasileirao2024A.txt")
+    df = simulator.reset_results_from(df, "2024-07-01")
+    rng = np.random.default_rng(8)
+    t1 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        tie_prob=0.3,
+        home_advantage=1.5,
+        progress=False,
+        n_jobs=2,
+    )
+    rng = np.random.default_rng(8)
+    t2 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        tie_prob=0.3,
+        home_advantage=1.5,
+        progress=False,
+        n_jobs=2,
+    )
+    pd.testing.assert_frame_equal(t1, t2)
+
+
 
