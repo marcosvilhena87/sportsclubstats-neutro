@@ -12,6 +12,7 @@ from .simulator import (
     DEFAULT_HOME_FIELD_ADVANTAGE,
     DEFAULT_JOBS,
 )
+from .calibration import estimate_parameters
 
 __all__ = [
     "parse_matches",
@@ -24,4 +25,5 @@ __all__ = [
     "DEFAULT_TIE_PERCENT",
     "DEFAULT_HOME_FIELD_ADVANTAGE",
     "DEFAULT_JOBS",
+    "estimate_parameters",
 ]

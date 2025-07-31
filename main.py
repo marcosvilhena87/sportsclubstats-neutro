@@ -18,6 +18,7 @@ from simulator import (
     DEFAULT_JOBS,
     DEFAULT_TIE_PERCENT,
     DEFAULT_HOME_FIELD_ADVANTAGE,
+    estimate_parameters,
 )
 
 
@@ -62,6 +63,11 @@ def main() -> None:
         help="relative advantage multiplier for the home team",
     )
     parser.add_argument(
+        "--auto-calibrate",
+        action="store_true",
+        help="estimate parameters from past seasons",
+    )
+    parser.add_argument(
         "--from-date",
         dest="from_date",
         default=None,
@@ -73,6 +79,14 @@ def main() -> None:
         help="path to save summary table as HTML",
     )
     args = parser.parse_args()
+
+    if args.auto_calibrate:
+        season_files = [
+            "data/Brasileirao2022A.txt",
+            "data/Brasileirao2023A.txt",
+            "data/Brasileirao2024A.txt",
+        ]
+        args.tie_percent, args.home_advantage = estimate_parameters(season_files)
 
     matches = parse_matches(args.file)
     if args.from_date:

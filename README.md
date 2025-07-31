@@ -21,12 +21,18 @@ example will execute the Monte Carlo iterations using four parallel processes.
 The summary table is automatically saved as `brasileirao.html` in the same
 directory as `main.py`. Pass `--html-output <file>` to choose a custom path.
 Use `--from-date YYYY-MM-DD` to ignore results on or after a given date and
-simulate from that point forward.
+simulate from that point forward. Use `--auto-calibrate` to derive the draw
+percentage and home advantage from recent seasons before running the
+simulation.
 
 The default draw rate and home-field advantage are
 `DEFAULT_TIE_PERCENT` (33.3) and `DEFAULT_HOME_FIELD_ADVANTAGE` (1.0).
 Use `--tie-percent` and `--home-advantage` to override these values on the
 command line. `DEFAULT_JOBS` still defines the parallelism level.
+
+Alternatively, pass `--auto-calibrate` to estimate these parameters from the
+previous seasons included in the `data/` directory. The computed draw rate and
+home advantage are then used for the simulation.
 
 Matches are simulated purely at random with all teams considered equal.
 
