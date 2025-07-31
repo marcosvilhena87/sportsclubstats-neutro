@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import pytest
 from simulator import parse_matches, league_table, simulate_chances
+from calibration import estimate_team_strengths
 import simulator
 
 
@@ -284,6 +285,30 @@ def test_summary_table_after_reset_other_params_deterministic():
         rng=rng,
         tie_prob=0.3,
         home_advantage=1.5,
+        progress=False,
+        n_jobs=2,
+    )
+    pd.testing.assert_frame_equal(t1, t2)
+
+
+def test_team_params_repeatable():
+    df = parse_matches("data/Brasileirao2024A.txt")
+    params = estimate_team_strengths(["data/Brasileirao2024A.txt"])
+    rng = np.random.default_rng(100)
+    t1 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        team_params=params,
+        progress=False,
+        n_jobs=2,
+    )
+    rng = np.random.default_rng(100)
+    t2 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        team_params=params,
         progress=False,
         n_jobs=2,
     )

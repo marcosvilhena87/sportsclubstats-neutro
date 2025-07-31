@@ -214,6 +214,7 @@ def _simulate_table(
     *,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
+    team_params: Dict[str, tuple[float, float]] | None = None,
 ) -> pd.DataFrame:
     """Simulate remaining fixtures with fixed home advantage."""
 
@@ -222,8 +223,15 @@ def _simulate_table(
     for _, row in remaining.iterrows():
         tp = tie_prob
         ha = home_advantage
+        if team_params is not None:
+            ha *= team_params.get(row["home_team"], (1.0, 1.0))[0] / team_params.get(row["away_team"], (1.0, 1.0))[1]
+            away_factor = team_params.get(row["away_team"], (1.0, 1.0))[0] / team_params.get(row["home_team"], (1.0, 1.0))[1]
+        else:
+            away_factor = 1.0
+
         rest = 1.0 - tp
-        home_prob = rest * ha / (ha + 1)
+        strength_sum = ha + away_factor
+        home_prob = rest * ha / strength_sum
         draw_prob = tp
         r = rng.random()
         if r < home_prob:
@@ -255,6 +263,7 @@ def _iterate_tables(
     progress: bool,
     tie_prob: float,
     home_advantage: float,
+    team_params: Dict[str, tuple[float, float]] | None,
     n_jobs: int,
 ):
     """Yield successive simulated tables.
@@ -276,6 +285,7 @@ def _iterate_tables(
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
                 home_advantage=home_advantage,
+                team_params=team_params,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -292,6 +302,7 @@ def _iterate_tables(
                 rng,
                 tie_prob=tie_prob,
                 home_advantage=home_advantage,
+                team_params=team_params,
             )
 
 
@@ -308,6 +319,7 @@ def simulate_chances(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
+    team_params: Dict[str, tuple[float, float]] | None = None,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return title probabilities.
@@ -335,6 +347,7 @@ def simulate_chances(
         progress=progress,
         tie_prob=tie_prob,
         home_advantage=home_advantage,
+        team_params=team_params,
         n_jobs=n_jobs,
     ):
         champs[table.iloc[0]["team"]] += 1
@@ -352,6 +365,7 @@ def simulate_relegation_chances(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
+    team_params: Dict[str, tuple[float, float]] | None = None,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return probabilities of finishing in the bottom four."""
@@ -376,6 +390,7 @@ def simulate_relegation_chances(
         progress=progress,
         tie_prob=tie_prob,
         home_advantage=home_advantage,
+        team_params=team_params,
         n_jobs=n_jobs,
     ):
         for team in table.tail(4)["team"]:
@@ -394,6 +409,7 @@ def simulate_final_table(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
+    team_params: Dict[str, tuple[float, float]] | None = None,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Project average finishing position and points."""
@@ -420,6 +436,7 @@ def simulate_final_table(
         progress=progress,
         tie_prob=tie_prob,
         home_advantage=home_advantage,
+        team_params=team_params,
         n_jobs=n_jobs,
     ):
         for idx, row in table.iterrows():
@@ -449,6 +466,7 @@ def summary_table(
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
+    team_params: Dict[str, tuple[float, float]] | None = None,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Return a combined projection table ranked by expected points.
@@ -480,6 +498,7 @@ def summary_table(
         progress=progress,
         tie_prob=tie_prob,
         home_advantage=home_advantage,
+        team_params=team_params,
         n_jobs=n_jobs,
     ):
         title_counts[table.iloc[0]["team"]] += 1
