@@ -126,14 +126,15 @@ def main() -> None:
     TITLE_W = 7
     REL_W = 10
     POINTS_W = len("xPts")
+    WINS_W = len("xWins")
     print(
-        f"{'Pos':>3}  {'Team':15s} {'xPts':^{POINTS_W}} {'Title':^{TITLE_W}} {'Relegation':^{REL_W}}"
+        f"{'Pos':>3}  {'Team':15s} {'xPts':^{POINTS_W}} {'xWins':^{WINS_W}} {'Title':^{TITLE_W}} {'Relegation':^{REL_W}}"
     )
     for _, row in summary.iterrows():
         title = f"{row['title']:.2%}"
         releg = f"{row['relegation']:.2%}"
         print(
-            f"{row['position']:>2d}   {row['team']:15s} {row['points']:^{POINTS_W}d} {title:^{TITLE_W}} {releg:^{REL_W}}"
+            f"{row['position']:>2d}   {row['team']:15s} {row['points']:^{POINTS_W}d} {row['wins']:^{WINS_W}d} {title:^{TITLE_W}} {releg:^{REL_W}}"
         )
 
 if __name__ == "__main__":
