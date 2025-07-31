@@ -96,7 +96,15 @@ def test_summary_table_deterministic():
         df, iterations=5, rng=rng, progress=False, n_jobs=2
     )
     pd.testing.assert_frame_equal(table1, table2)
-    assert {"position", "team", "points", "wins", "title", "relegation"}.issubset(table1.columns)
+    assert {
+        "position",
+        "team",
+        "points",
+        "wins",
+        "gd",
+        "title",
+        "relegation",
+    }.issubset(table1.columns)
 
 
 def test_league_table_tiebreakers():
