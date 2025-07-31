@@ -218,6 +218,11 @@ def _simulate_table(
 ) -> pd.DataFrame:
     """Simulate remaining fixtures with fixed home advantage."""
 
+    if not 0.0 <= tie_prob <= 1.0:
+        raise ValueError("tie_prob must be between 0 and 1")
+    if home_advantage <= 0:
+        raise ValueError("home_advantage must be greater than zero")
+
     sims: list[dict] = []
 
     for _, row in remaining.iterrows():
