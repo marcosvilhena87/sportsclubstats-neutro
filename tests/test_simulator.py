@@ -132,6 +132,43 @@ def test_simulate_table_no_draws_when_zero_tie():
     assert table["draws"].sum() == 0
 
 
+def _minimal_matches():
+    played = pd.DataFrame(
+        [],
+        columns=["date", "home_team", "away_team", "home_score", "away_score"],
+    )
+    remaining = pd.DataFrame(
+        [{"date": "2025-01-01", "home_team": "A", "away_team": "B"}]
+    )
+    return played, remaining
+
+
+def test_simulate_table_invalid_tie_prob():
+    played, remaining = _minimal_matches()
+    rng = np.random.default_rng(1)
+    with pytest.raises(ValueError):
+        simulator._simulate_table(played, remaining, rng, tie_prob=-0.1)
+    with pytest.raises(ValueError):
+        simulator._simulate_table(played, remaining, rng, tie_prob=1.1)
+
+
+def test_simulate_table_invalid_home_advantage():
+    played, remaining = _minimal_matches()
+    rng = np.random.default_rng(2)
+    with pytest.raises(ValueError):
+        simulator._simulate_table(played, remaining, rng, home_advantage=0)
+    with pytest.raises(ValueError):
+        simulator._simulate_table(played, remaining, rng, home_advantage=-1)
+
+
+def test_simulate_chances_invalid_params():
+    df = parse_matches("data/Brasileirao2024A.txt")
+    with pytest.raises(ValueError):
+        simulator.simulate_chances(df, iterations=1, tie_prob=2.0, progress=False)
+    with pytest.raises(ValueError):
+        simulator.simulate_chances(df, iterations=1, home_advantage=0, progress=False)
+
+
 def test_simulate_final_table_custom_params_deterministic():
     df = parse_matches("data/Brasileirao2024A.txt")
     rng = np.random.default_rng(9)
