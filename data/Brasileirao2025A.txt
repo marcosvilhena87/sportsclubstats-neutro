@@ -157,7 +157,7 @@ TeamListedFirst: home
 27/07/2025	Internacional	1-1	Vasco
 27/07/2025	Bahia		3-0	Juventude
 28/07/2025	Flamengo	1-0	Atlético-MG
-30/07/2025	Grêmio			Fortaleza
+29/07/2025	Grêmio		2-1	Fortaleza
 31/07/2025	Fluminense		Ceará
 31/07/2025	Sport			Flamengo
 31/07/2025	Palmeiras		Juventude
