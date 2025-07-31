@@ -31,6 +31,11 @@ The default draw rate and home-field advantage are
 Use `--tie-percent` and `--home-advantage` to override these values on the
 command line. `DEFAULT_JOBS` still defines the parallelism level.
 
+Pass `--home-goals-mean` and `--away-goals-mean` to sample scores from Poisson
+distributions with the given expected values instead of the basic win/draw/loss
+model. These options can also be provided programmatically via the simulation
+functions.
+
 Alternatively, pass `--auto-calibrate` to estimate these parameters using all
 historical files in the `data/` directory. The computed draw rate and home
 advantage are then used for the simulation.
@@ -46,7 +51,9 @@ strengths = estimate_team_strengths(["data/Brasileirao2024A.txt"])
 Pass ``strengths`` via the ``team_params`` argument when calling the simulation
 functions to incorporate team quality into the projections.
 
-Matches are simulated purely at random with all teams considered equal.
+By default matches are simulated purely at random with all teams considered
+equal. When expected goals are supplied the scores are drawn from Poisson
+distributions using those averages.
 
 The script outputs the estimated chance of winning the title for each team. It then prints the probability of each side finishing in the bottom four and being relegated. It also estimates the average final position and points of every club.
 All of these metrics are derived from a single Monte Carlo loop so that title chances, relegation odds and projected points remain consistent.
@@ -89,6 +96,8 @@ degree of parallelism. By default ``n_jobs`` is set to the number of CPU cores,
 so simulations automatically run in parallel. When ``n_jobs`` is greater than
 one, joblib is used to distribute the work across multiple workers. The tie
 percentage and home advantage are fixed at their defaults of 33.3% and 1.0.
+Provide expected goal values via ``home_goals_mean`` and ``away_goals_mean`` to
+enable Poisson-based scoring.
 
 ## Disclaimer
 

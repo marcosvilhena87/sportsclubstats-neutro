@@ -215,13 +215,26 @@ def _simulate_table(
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     team_params: Dict[str, tuple[float, float]] | None = None,
+    home_goals_mean: float | None = None,
+    away_goals_mean: float | None = None,
 ) -> pd.DataFrame:
-    """Simulate remaining fixtures with fixed home advantage."""
+    """Simulate remaining fixtures.
+
+    When ``home_goals_mean`` or ``away_goals_mean`` is provided the match
+    scores are sampled from Poisson distributions with the given means scaled by
+    ``home_advantage`` and any ``team_params``. Otherwise the classic
+    win/draw/loss model based on ``tie_prob`` is used.
+    """
 
     if not 0.0 <= tie_prob <= 1.0:
         raise ValueError("tie_prob must be between 0 and 1")
     if home_advantage <= 0:
         raise ValueError("home_advantage must be greater than zero")
+
+    if home_goals_mean is not None and home_goals_mean <= 0:
+        raise ValueError("home_goals_mean must be greater than zero")
+    if away_goals_mean is not None and away_goals_mean <= 0:
+        raise ValueError("away_goals_mean must be greater than zero")
 
     sims: list[dict] = []
 
@@ -234,17 +247,26 @@ def _simulate_table(
         else:
             away_factor = 1.0
 
-        rest = 1.0 - tp
-        strength_sum = ha + away_factor
-        home_prob = rest * ha / strength_sum
-        draw_prob = tp
-        r = rng.random()
-        if r < home_prob:
-            hs, as_ = 1, 0
-        elif r < home_prob + draw_prob:
-            hs, as_ = 0, 0
+        if home_goals_mean is not None or away_goals_mean is not None:
+            hm = home_goals_mean if home_goals_mean is not None else 1.0
+            am = away_goals_mean if away_goals_mean is not None else 1.0
+            hm *= ha
+            am *= away_factor
+            hs = int(rng.poisson(hm))
+            as_ = int(rng.poisson(am))
         else:
-            hs, as_ = 0, 1
+            rest = 1.0 - tp
+            strength_sum = ha + away_factor
+            home_prob = rest * ha / strength_sum
+            draw_prob = tp
+            r = rng.random()
+            if r < home_prob:
+                hs, as_ = 1, 0
+            elif r < home_prob + draw_prob:
+                hs, as_ = 0, 0
+            else:
+                hs, as_ = 0, 1
+
         sims.append(
             {
                 "date": row["date"],
@@ -269,6 +291,8 @@ def _iterate_tables(
     tie_prob: float,
     home_advantage: float,
     team_params: Dict[str, tuple[float, float]] | None,
+    home_goals_mean: float | None,
+    away_goals_mean: float | None,
     n_jobs: int,
 ):
     """Yield successive simulated tables.
@@ -291,6 +315,8 @@ def _iterate_tables(
                 tie_prob=tie_prob,
                 home_advantage=home_advantage,
                 team_params=team_params,
+                home_goals_mean=home_goals_mean,
+                away_goals_mean=away_goals_mean,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -308,6 +334,8 @@ def _iterate_tables(
                 tie_prob=tie_prob,
                 home_advantage=home_advantage,
                 team_params=team_params,
+                home_goals_mean=home_goals_mean,
+                away_goals_mean=away_goals_mean,
             )
 
 
@@ -325,6 +353,8 @@ def simulate_chances(
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     team_params: Dict[str, tuple[float, float]] | None = None,
+    home_goals_mean: float | None = None,
+    away_goals_mean: float | None = None,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return title probabilities.
@@ -353,6 +383,8 @@ def simulate_chances(
         tie_prob=tie_prob,
         home_advantage=home_advantage,
         team_params=team_params,
+        home_goals_mean=home_goals_mean,
+        away_goals_mean=away_goals_mean,
         n_jobs=n_jobs,
     ):
         champs[table.iloc[0]["team"]] += 1
@@ -371,6 +403,8 @@ def simulate_relegation_chances(
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     team_params: Dict[str, tuple[float, float]] | None = None,
+    home_goals_mean: float | None = None,
+    away_goals_mean: float | None = None,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return probabilities of finishing in the bottom four."""
@@ -396,6 +430,8 @@ def simulate_relegation_chances(
         tie_prob=tie_prob,
         home_advantage=home_advantage,
         team_params=team_params,
+        home_goals_mean=home_goals_mean,
+        away_goals_mean=away_goals_mean,
         n_jobs=n_jobs,
     ):
         for team in table.tail(4)["team"]:
@@ -415,6 +451,8 @@ def simulate_final_table(
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     team_params: Dict[str, tuple[float, float]] | None = None,
+    home_goals_mean: float | None = None,
+    away_goals_mean: float | None = None,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Project average finishing position and points."""
@@ -442,6 +480,8 @@ def simulate_final_table(
         tie_prob=tie_prob,
         home_advantage=home_advantage,
         team_params=team_params,
+        home_goals_mean=home_goals_mean,
+        away_goals_mean=away_goals_mean,
         n_jobs=n_jobs,
     ):
         for idx, row in table.iterrows():
@@ -472,6 +512,8 @@ def summary_table(
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
     home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     team_params: Dict[str, tuple[float, float]] | None = None,
+    home_goals_mean: float | None = None,
+    away_goals_mean: float | None = None,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Return a combined projection table ranked by expected points.
@@ -504,6 +546,8 @@ def summary_table(
         tie_prob=tie_prob,
         home_advantage=home_advantage,
         team_params=team_params,
+        home_goals_mean=home_goals_mean,
+        away_goals_mean=away_goals_mean,
         n_jobs=n_jobs,
     ):
         title_counts[table.iloc[0]["team"]] += 1

@@ -64,6 +64,18 @@ def main() -> None:
         help="relative advantage multiplier for the home team",
     )
     parser.add_argument(
+        "--home-goals-mean",
+        type=float,
+        default=None,
+        help="expected goals for the home side when using Poisson scoring",
+    )
+    parser.add_argument(
+        "--away-goals-mean",
+        type=float,
+        default=None,
+        help="expected goals for the away side when using Poisson scoring",
+    )
+    parser.add_argument(
         "--auto-calibrate",
         action="store_true",
         help="estimate parameters from past seasons",
@@ -104,6 +116,8 @@ def main() -> None:
         progress=args.progress,
         tie_prob=tie_prob,
         home_advantage=home_adv,
+        home_goals_mean=args.home_goals_mean,
+        away_goals_mean=args.away_goals_mean,
         n_jobs=args.jobs,
     )
     if args.html_output:
