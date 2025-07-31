@@ -4,6 +4,7 @@
 
 import os
 import sys
+import glob
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
@@ -81,10 +82,10 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.auto_calibrate:
+        pattern = os.path.join("data", "Brasileirao????A.txt")
+        season_files = sorted(glob.glob(pattern))
         season_files = [
-            "data/Brasileirao2022A.txt",
-            "data/Brasileirao2023A.txt",
-            "data/Brasileirao2024A.txt",
+            f for f in season_files if os.path.abspath(f) != os.path.abspath(args.file)
         ]
         args.tie_percent, args.home_advantage = estimate_parameters(season_files)
 

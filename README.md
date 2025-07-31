@@ -8,7 +8,7 @@ Install dependencies from `requirements.txt` and run the simulator:
 
 ```bash
 pip install -r requirements.txt
-python main.py --simulations 1000
+python main.py --auto-calibrate --simulations 1000
 ```
 
 A progress bar is shown by default during the simulation runs. Use the
@@ -22,17 +22,18 @@ The summary table is automatically saved as `brasileirao.html` in the same
 directory as `main.py`. Pass `--html-output <file>` to choose a custom path.
 Use `--from-date YYYY-MM-DD` to ignore results on or after a given date and
 simulate from that point forward. Use `--auto-calibrate` to derive the draw
-percentage and home advantage from recent seasons before running the
-simulation.
+percentage and home advantage from past seasons before running the simulation.
+When this flag is supplied, every file matching `data/Brasileirao????A.txt` is
+loaded automatically (except the file provided via `--file`).
 
 The default draw rate and home-field advantage are
 `DEFAULT_TIE_PERCENT` (33.3) and `DEFAULT_HOME_FIELD_ADVANTAGE` (1.0).
 Use `--tie-percent` and `--home-advantage` to override these values on the
 command line. `DEFAULT_JOBS` still defines the parallelism level.
 
-Alternatively, pass `--auto-calibrate` to estimate these parameters from the
-previous seasons included in the `data/` directory. The computed draw rate and
-home advantage are then used for the simulation.
+Alternatively, pass `--auto-calibrate` to estimate these parameters using all
+historical files in the `data/` directory. The computed draw rate and home
+advantage are then used for the simulation.
 
 Matches are simulated purely at random with all teams considered equal.
 
