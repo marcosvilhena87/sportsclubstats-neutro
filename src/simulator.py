@@ -244,6 +244,53 @@ def _simulate_table(
     return league_table(all_matches)
 
 
+def _iterate_tables(
+    played_df: pd.DataFrame,
+    remaining: pd.DataFrame,
+    rng: np.random.Generator,
+    iterations: int,
+    *,
+    desc: str,
+    progress: bool,
+    tie_prob: float,
+    n_jobs: int,
+):
+    """Yield successive simulated tables.
+
+    This helper mirrors the parallel and serial execution logic used by the
+    public simulation functions to ensure deterministic ordering of results.
+    """
+
+    if n_jobs > 1:
+        seeds = rng.integers(0, 2**32 - 1, size=iterations)
+        iterator = seeds
+        if progress and tqdm is not None:
+            iterator = tqdm(iterator, desc=desc, unit="sim")
+
+        def run(seed: int) -> pd.DataFrame:
+            return _simulate_table(
+                played_df,
+                remaining,
+                np.random.default_rng(seed),
+                tie_prob=tie_prob,
+            )
+
+        results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
+        for table in results:
+            yield table
+    else:
+        iterator = range(iterations)
+        if progress and tqdm is not None:
+            iterator = tqdm(iterator, desc=desc, unit="sim")
+        for _ in iterator:
+            yield _simulate_table(
+                played_df,
+                remaining,
+                rng,
+                tie_prob=tie_prob,
+            )
+
+
 # ---------------------------------------------------------------------------
 # Public simulation API
 # ---------------------------------------------------------------------------
@@ -274,35 +321,17 @@ def simulate_chances(
         matches["home_score"].isna() | matches["away_score"].isna()
     ]
 
-    if n_jobs > 1:
-        seeds = rng.integers(0, 2**32 - 1, size=iterations)
-        iterator = seeds
-        if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc="Chances", unit="sim")
-
-        def run(seed: int) -> pd.DataFrame:
-            return _simulate_table(
-                played_df,
-                remaining,
-                np.random.default_rng(seed),
-                tie_prob=tie_prob,
-            )
-
-        results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
-        for table in results:
-            champs[table.iloc[0]["team"]] += 1
-    else:
-        iterator = range(iterations)
-        if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc="Chances", unit="sim")
-        for _ in iterator:
-            table = _simulate_table(
-                played_df,
-                remaining,
-                rng,
-                tie_prob=tie_prob,
-            )
-            champs[table.iloc[0]["team"]] += 1
+    for table in _iterate_tables(
+        played_df,
+        remaining,
+        rng,
+        iterations,
+        desc="Chances",
+        progress=progress,
+        tie_prob=tie_prob,
+        n_jobs=n_jobs,
+    ):
+        champs[table.iloc[0]["team"]] += 1
 
     for t in champs:
         champs[t] /= iterations
@@ -331,37 +360,18 @@ def simulate_relegation_chances(
     remaining = matches[
         matches["home_score"].isna() | matches["away_score"].isna()
     ]
-    if n_jobs > 1:
-        seeds = rng.integers(0, 2**32 - 1, size=iterations)
-        iterator = seeds
-        if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc="Relegation", unit="sim")
-
-        def run(seed: int) -> pd.DataFrame:
-            return _simulate_table(
-                played_df,
-                remaining,
-                np.random.default_rng(seed),
-                tie_prob=tie_prob,
-            )
-
-        results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
-        for table in results:
-            for team in table.tail(4)["team"]:
-                relegated[team] += 1
-    else:
-        iterator = range(iterations)
-        if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc="Relegation", unit="sim")
-        for _ in iterator:
-            table = _simulate_table(
-                played_df,
-                remaining,
-                rng,
-                tie_prob=tie_prob,
-            )
-            for team in table.tail(4)["team"]:
-                relegated[team] += 1
+    for table in _iterate_tables(
+        played_df,
+        remaining,
+        rng,
+        iterations,
+        desc="Relegation",
+        progress=progress,
+        tie_prob=tie_prob,
+        n_jobs=n_jobs,
+    ):
+        for team in table.tail(4)["team"]:
+            relegated[team] += 1
 
     for t in relegated:
         relegated[t] /= iterations
@@ -392,39 +402,19 @@ def simulate_final_table(
         matches["home_score"].isna() | matches["away_score"].isna()
     ]
 
-    if n_jobs > 1:
-        seeds = rng.integers(0, 2**32 - 1, size=iterations)
-        iterator = seeds
-        if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc="Final table", unit="sim")
-
-        def run(seed: int) -> pd.DataFrame:
-            return _simulate_table(
-                played_df,
-                remaining,
-                np.random.default_rng(seed),
-                tie_prob=tie_prob,
-            )
-
-        results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
-        for table in results:
-            for idx, row in table.iterrows():
-                pos_totals[row["team"]] += idx + 1
-                points_totals[row["team"]] += row["points"]
-    else:
-        iterator = range(iterations)
-        if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc="Final table", unit="sim")
-        for _ in iterator:
-            table = _simulate_table(
-                played_df,
-                remaining,
-                rng,
-                tie_prob=tie_prob,
-            )
-            for idx, row in table.iterrows():
-                pos_totals[row["team"]] += idx + 1
-                points_totals[row["team"]] += row["points"]
+    for table in _iterate_tables(
+        played_df,
+        remaining,
+        rng,
+        iterations,
+        desc="Final table",
+        progress=progress,
+        tie_prob=tie_prob,
+        n_jobs=n_jobs,
+    ):
+        for idx, row in table.iterrows():
+            pos_totals[row["team"]] += idx + 1
+            points_totals[row["team"]] += row["points"]
 
     results = []
     for team in teams:
@@ -470,44 +460,21 @@ def summary_table(
         matches["home_score"].isna() | matches["away_score"].isna()
     ]
 
-    if n_jobs > 1:
-        seeds = rng.integers(0, 2**32 - 1, size=iterations)
-        iterator = seeds
-        if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc="Summary", unit="sim")
-
-        def run(seed: int) -> pd.DataFrame:
-            return _simulate_table(
-                played_df,
-                remaining,
-                np.random.default_rng(seed),
-                tie_prob=tie_prob,
-            )
-
-        results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
-        for table in results:
-            title_counts[table.iloc[0]["team"]] += 1
-            for team in table.tail(4)["team"]:
-                relegated[team] += 1
-            for _, row in table.iterrows():
-                points_totals[row["team"]] += row["points"]
-    else:
-        iterator = range(iterations)
-        if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc="Summary", unit="sim")
-
-        for _ in iterator:
-            table = _simulate_table(
-                played_df,
-                remaining,
-                rng,
-                tie_prob=tie_prob,
-            )
-            title_counts[table.iloc[0]["team"]] += 1
-            for team in table.tail(4)["team"]:
-                relegated[team] += 1
-            for _, row in table.iterrows():
-                points_totals[row["team"]] += row["points"]
+    for table in _iterate_tables(
+        played_df,
+        remaining,
+        rng,
+        iterations,
+        desc="Summary",
+        progress=progress,
+        tie_prob=tie_prob,
+        n_jobs=n_jobs,
+    ):
+        title_counts[table.iloc[0]["team"]] += 1
+        for team in table.tail(4)["team"]:
+            relegated[team] += 1
+        for _, row in table.iterrows():
+            points_totals[row["team"]] += row["points"]
 
     rows = []
     for team in teams:
