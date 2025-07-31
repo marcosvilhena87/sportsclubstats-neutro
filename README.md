@@ -79,6 +79,12 @@ so simulations automatically run in parallel. When ``n_jobs`` is greater than
 one, joblib is used to distribute the work across multiple workers. The tie
 percentage and home advantage are fixed at their defaults of 33.3% and 1.0.
 
+## Disclaimer
+
+This simulator is provided for fun and entertainment only. The predictions and
+tables produced are unofficial and may be inaccurate. Do not rely on them for
+betting or other serious purposes.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
