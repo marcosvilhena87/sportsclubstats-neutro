@@ -213,6 +213,7 @@ def _simulate_table(
     rng: np.random.Generator,
     *,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
+    home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
 ) -> pd.DataFrame:
     """Simulate remaining fixtures with fixed home advantage."""
 
@@ -220,7 +221,7 @@ def _simulate_table(
 
     for _, row in remaining.iterrows():
         tp = tie_prob
-        ha = DEFAULT_HOME_FIELD_ADVANTAGE
+        ha = home_advantage
         rest = 1.0 - tp
         home_prob = rest * ha / (ha + 1)
         draw_prob = tp
@@ -253,6 +254,7 @@ def _iterate_tables(
     desc: str,
     progress: bool,
     tie_prob: float,
+    home_advantage: float,
     n_jobs: int,
 ):
     """Yield successive simulated tables.
@@ -273,6 +275,7 @@ def _iterate_tables(
                 remaining,
                 np.random.default_rng(seed),
                 tie_prob=tie_prob,
+                home_advantage=home_advantage,
             )
 
         results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
@@ -288,6 +291,7 @@ def _iterate_tables(
                 remaining,
                 rng,
                 tie_prob=tie_prob,
+                home_advantage=home_advantage,
             )
 
 
@@ -303,6 +307,7 @@ def simulate_chances(
     rng: np.random.Generator | None = None,
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
+    home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return title probabilities.
@@ -329,6 +334,7 @@ def simulate_chances(
         desc="Chances",
         progress=progress,
         tie_prob=tie_prob,
+        home_advantage=home_advantage,
         n_jobs=n_jobs,
     ):
         champs[table.iloc[0]["team"]] += 1
@@ -345,6 +351,7 @@ def simulate_relegation_chances(
     rng: np.random.Generator | None = None,
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
+    home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     n_jobs: int = DEFAULT_JOBS,
 ) -> Dict[str, float]:
     """Return probabilities of finishing in the bottom four."""
@@ -368,6 +375,7 @@ def simulate_relegation_chances(
         desc="Relegation",
         progress=progress,
         tie_prob=tie_prob,
+        home_advantage=home_advantage,
         n_jobs=n_jobs,
     ):
         for team in table.tail(4)["team"]:
@@ -385,6 +393,7 @@ def simulate_final_table(
     rng: np.random.Generator | None = None,
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
+    home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Project average finishing position and points."""
@@ -410,6 +419,7 @@ def simulate_final_table(
         desc="Final table",
         progress=progress,
         tie_prob=tie_prob,
+        home_advantage=home_advantage,
         n_jobs=n_jobs,
     ):
         for idx, row in table.iterrows():
@@ -438,6 +448,7 @@ def summary_table(
     rng: np.random.Generator | None = None,
     progress: bool = True,
     tie_prob: float = DEFAULT_TIE_PERCENT / 100.0,
+    home_advantage: float = DEFAULT_HOME_FIELD_ADVANTAGE,
     n_jobs: int = DEFAULT_JOBS,
 ) -> pd.DataFrame:
     """Return a combined projection table ranked by expected points.
@@ -468,6 +479,7 @@ def summary_table(
         desc="Summary",
         progress=progress,
         tie_prob=tie_prob,
+        home_advantage=home_advantage,
         n_jobs=n_jobs,
     ):
         title_counts[table.iloc[0]["team"]] += 1

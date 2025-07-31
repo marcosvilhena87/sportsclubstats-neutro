@@ -17,6 +17,7 @@ from simulator import (
     summary_table,
     DEFAULT_JOBS,
     DEFAULT_TIE_PERCENT,
+    DEFAULT_HOME_FIELD_ADVANTAGE,
 )
 
 
@@ -49,6 +50,18 @@ def main() -> None:
         help="number of parallel workers",
     )
     parser.add_argument(
+        "--tie-percent",
+        type=float,
+        default=DEFAULT_TIE_PERCENT,
+        help="percent chance of a match ending in a draw",
+    )
+    parser.add_argument(
+        "--home-advantage",
+        type=float,
+        default=DEFAULT_HOME_FIELD_ADVANTAGE,
+        help="relative advantage multiplier for the home team",
+    )
+    parser.add_argument(
         "--from-date",
         dest="from_date",
         default=None,
@@ -66,8 +79,8 @@ def main() -> None:
         from_date = pd.to_datetime(args.from_date)
         matches.loc[matches["date"] >= from_date, ["home_score", "away_score"]] = np.nan
     rng = np.random.default_rng(args.seed) if args.seed is not None else None
-    # Fixed simulation parameters
-    tie_prob = DEFAULT_TIE_PERCENT / 100.0
+    tie_prob = args.tie_percent / 100.0
+    home_adv = args.home_advantage
 
     summary = summary_table(
         matches,
@@ -75,6 +88,7 @@ def main() -> None:
         rng=rng,
         progress=args.progress,
         tie_prob=tie_prob,
+        home_advantage=home_adv,
         n_jobs=args.jobs,
     )
     if args.html_output:

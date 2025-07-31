@@ -23,9 +23,10 @@ directory as `main.py`. Pass `--html-output <file>` to choose a custom path.
 Use `--from-date YYYY-MM-DD` to ignore results on or after a given date and
 simulate from that point forward.
 
-The draw rate and home-field advantage are fixed at
+The default draw rate and home-field advantage are
 `DEFAULT_TIE_PERCENT` (33.3) and `DEFAULT_HOME_FIELD_ADVANTAGE` (1.0).
-`DEFAULT_JOBS` still defines the parallelism level.
+Use `--tie-percent` and `--home-advantage` to override these values on the
+command line. `DEFAULT_JOBS` still defines the parallelism level.
 
 Matches are simulated purely at random with all teams considered equal.
 
