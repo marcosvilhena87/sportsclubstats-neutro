@@ -136,11 +136,5 @@ def main() -> None:
             f"{row['position']:>2d}   {row['team']:15s} {row['points']:^{POINTS_W}d} {title:^{TITLE_W}} {releg:^{REL_W}}"
         )
 
-    print()
-    print(
-        "Predictions are unofficial and provided for entertainment purposes only."
-    )
-    print("Actual outcomes may differ considerably.")
-
 if __name__ == "__main__":
     main()
