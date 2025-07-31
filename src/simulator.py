@@ -531,6 +531,7 @@ def summary_table(
     relegated = {t: 0 for t in teams}
     points_totals = {t: 0.0 for t in teams}
     wins_totals = {t: 0.0 for t in teams}
+    gd_totals = {t: 0.0 for t in teams}
 
     played_df = matches.dropna(subset=["home_score", "away_score"])
     remaining = matches[
@@ -557,6 +558,7 @@ def summary_table(
         for _, row in table.iterrows():
             points_totals[row["team"]] += row["points"]
             wins_totals[row["team"]] += row["wins"]
+            gd_totals[row["team"]] += row["gd"]
 
     rows = []
     for team in teams:
@@ -565,6 +567,7 @@ def summary_table(
                 "team": team,
                 "points": points_totals[team] / iterations,
                 "wins": wins_totals[team] / iterations,
+                "gd": gd_totals[team] / iterations,
                 "title": title_counts[team] / iterations,
                 "relegation": relegated[team] / iterations,
             }
@@ -575,4 +578,5 @@ def summary_table(
     df["position"] = range(1, len(df) + 1)
     df["points"] = df["points"].round().astype(int)
     df["wins"] = df["wins"].round().astype(int)
-    return df[["position", "team", "points", "wins", "title", "relegation"]]
+    df["gd"] = df["gd"].round().astype(int)
+    return df[["position", "team", "points", "wins", "gd", "title", "relegation"]]
