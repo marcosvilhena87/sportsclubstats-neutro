@@ -139,6 +139,7 @@ def test_simulate_final_table_custom_params_deterministic():
         iterations=5,
         rng=rng,
         tie_prob=0.2,
+        home_advantage=1.3,
         n_jobs=2,
     )
     rng = np.random.default_rng(9)
@@ -147,6 +148,32 @@ def test_simulate_final_table_custom_params_deterministic():
         iterations=5,
         rng=rng,
         tie_prob=0.2,
+        home_advantage=1.3,
+        n_jobs=2,
+    )
+    pd.testing.assert_frame_equal(t1, t2)
+
+
+def test_custom_params_repeatable():
+    df = parse_matches("data/Brasileirao2024A.txt")
+    rng = np.random.default_rng(11)
+    t1 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        tie_prob=0.25,
+        home_advantage=1.4,
+        progress=False,
+        n_jobs=2,
+    )
+    rng = np.random.default_rng(11)
+    t2 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        tie_prob=0.25,
+        home_advantage=1.4,
+        progress=False,
         n_jobs=2,
     )
     pd.testing.assert_frame_equal(t1, t2)
