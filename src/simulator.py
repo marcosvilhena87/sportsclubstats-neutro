@@ -585,7 +585,7 @@ def summary_table(
         )
 
     df = pd.DataFrame(rows)
-    df = df.sort_values(["points", "wins"], ascending=[False, False]).reset_index(drop=True)
+    df = df.sort_values(["points", "wins", "gd"], ascending=[False, False, False]).reset_index(drop=True)
     df["position"] = range(1, len(df) + 1)
     df["points"] = df["points"].round().astype(int)
     df["wins"] = df["wins"].round().astype(int)
