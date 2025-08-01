@@ -38,6 +38,11 @@ DEFAULT_HOME_FIELD_ADVANTAGE = 1.0
 # Default number of parallel jobs. Use all available cores.
 DEFAULT_JOBS = os.cpu_count() or 1
 
+# Number of simulations to execute per parallel batch when running with
+# ``n_jobs`` greater than one. Smaller batches keep memory usage low while
+# ensuring deterministic ordering of results.
+_BATCH_SIZE = 100
+
 
 
 # ---------------------------------------------------------------------------
@@ -303,9 +308,9 @@ def _iterate_tables(
 
     if n_jobs > 1:
         seeds = rng.integers(0, 2**32 - 1, size=iterations)
-        iterator = seeds
+        pbar = None
         if progress and tqdm is not None:
-            iterator = tqdm(iterator, desc=desc, unit="sim")
+            pbar = tqdm(seeds, desc=desc, unit="sim")
 
         def run(seed: int) -> pd.DataFrame:
             return _simulate_table(
@@ -319,9 +324,15 @@ def _iterate_tables(
                 away_goals_mean=away_goals_mean,
             )
 
-        results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in iterator)
-        for table in results:
-            yield table
+        for start in range(0, iterations, _BATCH_SIZE):
+            batch = seeds[start : start + _BATCH_SIZE]
+            results = Parallel(n_jobs=n_jobs)(delayed(run)(s) for s in batch)
+            if pbar is not None and hasattr(pbar, "update"):
+                pbar.update(len(batch))
+            for table in results:
+                yield table
+        if pbar is not None and hasattr(pbar, "close"):
+            pbar.close()
     else:
         iterator = range(iterations)
         if progress and tqdm is not None:
