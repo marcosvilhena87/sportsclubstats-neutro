@@ -30,7 +30,7 @@ def main() -> None:
         "--file", default="data/Brasileirao2025A.txt", help="fixture file path"
     )
     parser.add_argument(
-        "--simulations", type=int, default=5000, help="number of simulation runs"
+        "--simulations", type=int, default=10000, help="number of simulation runs"
     )
     parser.add_argument(
         "--seed",
