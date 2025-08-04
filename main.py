@@ -20,7 +20,12 @@ from simulator import (
     DEFAULT_TIE_PERCENT,
     DEFAULT_HOME_FIELD_ADVANTAGE,
 )
-from calibration import estimate_parameters
+from calibration import (
+    estimate_parameters,
+    estimate_goal_means,
+    estimate_team_strengths,
+    estimate_rho,
+)
 
 
 
@@ -30,7 +35,7 @@ def main() -> None:
         "--file", default="data/Brasileirao2025A.txt", help="fixture file path"
     )
     parser.add_argument(
-        "--simulations", type=int, default=10000, help="number of simulation runs"
+        "--simulations", type=int, default=5000, help="number of simulation runs"
     )
     parser.add_argument(
         "--seed",
@@ -76,9 +81,20 @@ def main() -> None:
         help="expected goals for the away side when using Poisson scoring",
     )
     parser.add_argument(
+        "--rho",
+        type=float,
+        default=None,
+        help="correlação entre gols (Poisson)",
+    )
+    parser.add_argument(
         "--auto-calibrate",
         action="store_true",
         help="estimate parameters from past seasons",
+    )
+    parser.add_argument(
+        "--auto-team-strengths",
+        action="store_true",
+        help="estimate attack and defense multipliers from past seasons",
     )
     parser.add_argument(
         "--from-date",
@@ -93,13 +109,24 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    if args.auto_calibrate:
+    season_files: list[str] | None = None
+    if args.auto_calibrate or args.auto_team_strengths:
         pattern = os.path.join("data", "Brasileirao????A.txt")
         season_files = sorted(glob.glob(pattern))
         season_files = [
             f for f in season_files if os.path.abspath(f) != os.path.abspath(args.file)
         ]
+
+    if args.auto_calibrate:
+        season_files = season_files or []
         args.tie_percent, args.home_advantage = estimate_parameters(season_files)
+        args.home_goals_mean, args.away_goals_mean = estimate_goal_means(season_files)
+        args.rho = estimate_rho(season_files)
+
+    team_params = None
+    if args.auto_team_strengths:
+        season_files = season_files or []
+        team_params = estimate_team_strengths(season_files)
 
     matches = parse_matches(args.file)
     if args.from_date:
@@ -116,26 +143,30 @@ def main() -> None:
         progress=args.progress,
         tie_prob=tie_prob,
         home_advantage=home_adv,
+        team_params=team_params,
         home_goals_mean=args.home_goals_mean,
         away_goals_mean=args.away_goals_mean,
+        rho=args.rho,
         n_jobs=args.jobs,
     )
     if args.html_output:
         summary.to_html(args.html_output, index=False)
 
     TITLE_W = 7
+    TOP4_W = 7
     REL_W = 10
     POINTS_W = len("xPts")
     WINS_W = len("xWins")
     GD_W = len("xGD")
     print(
-        f"{'Pos':>3}  {'Team':15s} {'xPts':^{POINTS_W}} {'xWins':^{WINS_W}} {'xGD':^{GD_W}} {'Title':^{TITLE_W}} {'Relegation':^{REL_W}}"
+        f"{'Pos':>3}  {'Team':15s} {'xPts':^{POINTS_W}} {'xWins':^{WINS_W}} {'xGD':^{GD_W}} {'Title':^{TITLE_W}} {'Top4':^{TOP4_W}} {'Relegation':^{REL_W}}"
     )
     for _, row in summary.iterrows():
         title = f"{row['title']:.2%}"
+        top4 = f"{row['top4']:.2%}"
         releg = f"{row['relegation']:.2%}"
         print(
-            f"{row['position']:>2d}   {row['team']:15s} {row['points']:^{POINTS_W}d} {row['wins']:^{WINS_W}d} {row['gd']:^{GD_W}d} {title:^{TITLE_W}} {releg:^{REL_W}}"
+            f"{row['position']:>2d}   {row['team']:15s} {row['points']:^{POINTS_W}d} {row['wins']:^{WINS_W}d} {row['gd']:^{GD_W}d} {title:^{TITLE_W}} {top4:^{TOP4_W}} {releg:^{REL_W}}"
         )
 
 if __name__ == "__main__":

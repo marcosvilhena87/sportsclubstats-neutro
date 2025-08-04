@@ -13,6 +13,27 @@ def test_parse_matches():
     assert {'home_team', 'away_team', 'home_score', 'away_score'}.issubset(df.columns)
 
 
+def test_parse_matches_missing_begin(tmp_path):
+    p = tmp_path / "matches.txt"
+    p.write_text("Some header\nGamesEnd\n")
+    with pytest.raises(ValueError):
+        parse_matches(p)
+
+
+def test_parse_matches_missing_end(tmp_path):
+    p = tmp_path / "matches.txt"
+    p.write_text("GamesBegin\n")
+    with pytest.raises(ValueError):
+        parse_matches(p)
+
+
+def test_parse_matches_invalid_line(tmp_path):
+    p = tmp_path / "matches.txt"
+    p.write_text("GamesBegin\ninvalid stuff\nGamesEnd\n")
+    with pytest.raises(ValueError, match="invalid stuff"):
+        parse_matches(p)
+
+
 def test_league_table():
     df = parse_matches('data/Brasileirao2024A.txt')
     table = league_table(df)
@@ -103,8 +124,15 @@ def test_summary_table_deterministic():
         "wins",
         "gd",
         "title",
+        "top4",
         "relegation",
     }.issubset(table1.columns)
+
+
+def test_summary_table_top4_probabilities_sum_to_four():
+    df = parse_matches('data/Brasileirao2024A.txt')
+    table = simulator.summary_table(df, iterations=10, progress=False, n_jobs=2)
+    assert abs(table['top4'].sum() - 4.0) < 1e-6
 
 
 def test_league_table_tiebreakers():
@@ -175,6 +203,38 @@ def test_simulate_chances_invalid_params():
         simulator.simulate_chances(df, iterations=1, tie_prob=2.0, progress=False)
     with pytest.raises(ValueError):
         simulator.simulate_chances(df, iterations=1, home_advantage=0, progress=False)
+
+
+@pytest.mark.parametrize(
+    "func",
+    [
+        simulator.simulate_chances,
+        simulator.simulate_relegation_chances,
+        simulator.simulate_final_table,
+        simulator.summary_table,
+    ],
+)
+@pytest.mark.parametrize("iter_count", [0, -1])
+def test_iterations_must_be_positive(func, iter_count):
+    df = parse_matches("data/Brasileirao2024A.txt")
+    with pytest.raises(ValueError):
+        func(df, iterations=iter_count, progress=False)
+
+
+@pytest.mark.parametrize(
+    "func",
+    [
+        simulator.simulate_chances,
+        simulator.simulate_relegation_chances,
+        simulator.simulate_final_table,
+        simulator.summary_table,
+    ],
+)
+@pytest.mark.parametrize("n_jobs", [0, -1])
+def test_n_jobs_must_be_positive(func, n_jobs):
+    df = parse_matches("data/Brasileirao2024A.txt")
+    with pytest.raises(ValueError):
+        func(df, iterations=1, progress=False, n_jobs=n_jobs)
 
 
 def test_simulate_final_table_custom_params_deterministic():
@@ -385,6 +445,90 @@ def test_poisson_mode_repeatable():
     pd.testing.assert_frame_equal(t1, t2)
 
 
+def test_correlated_poisson_repeatable():
+    df = parse_matches("data/Brasileirao2024A.txt")
+    rng = np.random.default_rng(321)
+    t1 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        home_goals_mean=1.4,
+        away_goals_mean=1.1,
+        rho=0.3,
+        progress=False,
+        n_jobs=2,
+    )
+    rng = np.random.default_rng(321)
+    t2 = simulator.summary_table(
+        df,
+        iterations=5,
+        rng=rng,
+        home_goals_mean=1.4,
+        away_goals_mean=1.1,
+        rho=0.3,
+        progress=False,
+        n_jobs=2,
+    )
+    pd.testing.assert_frame_equal(t1, t2)
+
+
+def test_final_table_correlated_poisson_repeatable():
+    df = parse_matches("data/Brasileirao2024A.txt")
+    rng = np.random.default_rng(222)
+    t1 = simulator.simulate_final_table(
+        df,
+        iterations=5,
+        rng=rng,
+        home_goals_mean=1.3,
+        away_goals_mean=1.0,
+        rho=0.25,
+        progress=False,
+        n_jobs=2,
+    )
+    rng = np.random.default_rng(222)
+    t2 = simulator.simulate_final_table(
+        df,
+        iterations=5,
+        rng=rng,
+        home_goals_mean=1.3,
+        away_goals_mean=1.0,
+        rho=0.25,
+        progress=False,
+        n_jobs=2,
+    )
+    pd.testing.assert_frame_equal(t1, t2)
+
+
+def test_simulate_table_invalid_rho():
+    played, remaining = _minimal_matches()
+    rng = np.random.default_rng(10)
+    with pytest.raises(ValueError):
+        simulator._simulate_table(
+            played,
+            remaining,
+            rng,
+            home_goals_mean=1.0,
+            away_goals_mean=1.0,
+            rho=1.2,
+        )
+    with pytest.raises(ValueError):
+        simulator._simulate_table(
+            played,
+            remaining,
+            rng,
+            home_goals_mean=1.0,
+            away_goals_mean=1.0,
+            rho=-1.1,
+        )
+    with pytest.raises(ValueError):
+        simulator._simulate_table(
+            played,
+            remaining,
+            rng,
+            rho=0.2,
+        )
+
+
 def test_simulate_table_invalid_goal_means():
     played, remaining = _minimal_matches()
     rng = np.random.default_rng(3)
@@ -392,6 +536,15 @@ def test_simulate_table_invalid_goal_means():
         simulator._simulate_table(played, remaining, rng, home_goals_mean=0)
     with pytest.raises(ValueError):
         simulator._simulate_table(played, remaining, rng, away_goals_mean=-1)
+
+
+def test_simulate_table_requires_both_means():
+    played, remaining = _minimal_matches()
+    rng = np.random.default_rng(5)
+    with pytest.raises(ValueError):
+        simulator._simulate_table(played, remaining, rng, home_goals_mean=1.2)
+    with pytest.raises(ValueError):
+        simulator._simulate_table(played, remaining, rng, away_goals_mean=1.1)
 
 
 
