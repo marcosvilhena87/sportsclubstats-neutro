@@ -163,9 +163,9 @@ TeamListedFirst: home
 03/08/2025	Fluminense	1-0	Grêmio
 03/08/2025	Corinthians	1-1	Fortaleza
 03/08/2025	Botafogo	0-2	Cruzeiro
-03/08/2025	Ceará			Flamengo
-03/08/2025	Atlético-MG		Bragantino
-03/08/2025	Vitória			Palmeiras
+03/08/2025	Ceará		1-1	Flamengo
+03/08/2025	Atlético-MG	2-1	Bragantino
+03/08/2025	Vitória		2-2	Palmeiras
 04/08/2025	Internacional		São Paulo
 05/08/2025	Santos			Juventude
 06/08/2025	Botafogo		Mirassol
