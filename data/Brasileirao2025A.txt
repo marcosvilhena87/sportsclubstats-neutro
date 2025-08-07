@@ -167,19 +167,7 @@ TeamListedFirst: home
 03/08/2025	Atlético-MG	2-1	Bragantino
 03/08/2025	Vitória		2-2	Palmeiras
 03/08/2025	Internacional	1-2	São Paulo
-04/08/2025	Santos			Juventude
-06/08/2025	Sport			Flamengo
-06/08/2025	Palmeiras		Juventude
-06/08/2025	Fluminense		Ceará
-06/08/2025	Botafogo		Mirassol
-06/08/2025	Bahia			Internacional
-06/08/2025	Atlético-MG		Fortaleza
-07/08/2025	Mirassol		Fluminense
-07/08/2025	Santos			Palmeiras
-07/08/2025	Juventude		Vasco
-07/08/2025	Atlético-MG		Sport
-07/08/2025	Vasco			Bahia
-07/08/2025	Grêmio			Botafogo
+04/08/2025	Santos		3-1	Juventude
 09/08/2025	São Paulo		Vitória
 09/08/2025	Bragantino		Internacional
 09/08/2025	Flamengo		Mirassol
@@ -190,6 +178,18 @@ TeamListedFirst: home
 10/08/2025	Cruzeiro		Santos
 10/08/2025	Grêmio			Sport
 11/08/2025	Juventude		Corinthians
+13/08/2025	Sport			Flamengo
+13/08/2025	Palmeiras		Juventude
+13/08/2025	Fluminense		Ceará
+13/08/2025	Botafogo		Mirassol
+13/08/2025	Bahia			Internacional
+13/08/2025	Atlético-MG		Fortaleza
+14/08/2025	Mirassol		Fluminense
+14/08/2025	Santos			Palmeiras
+14/08/2025	Juventude		Vasco
+14/08/2025	Atlético-MG		Sport
+14/08/2025	Vasco			Bahia
+14/08/2025	Grêmio			Botafogo
 16/08/2025	Fluminense		Fortaleza
 16/08/2025	Ceará			Bragantino
 16/08/2025	Sport			São Paulo
